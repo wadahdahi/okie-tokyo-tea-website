@@ -3,7 +3,7 @@ export const IMAGES = {
     DEFAULT: "/assets/images/logo/logo.webp",
   },
   PRODUCTS: {
-    // DEFAULT_POUCH: "/assets/images/okietokyotea-pouch-mockup.webp",
+    DEFAULT_POUCH: "/assets/images/okietokyotea-pouch-mockup.webp",
     CUP_01: "/assets/images/matcha-cup-01.webp",
     CUP_02: "/assets/images/matcha-cup-02.webp",
     CUP_CIRCLE: "/assets/images/matcha-cup-circle.webp",
