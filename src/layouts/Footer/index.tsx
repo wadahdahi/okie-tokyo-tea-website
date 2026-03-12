@@ -1,5 +1,5 @@
 import React from "react";
-import { FaInstagram, FaLeaf, FaFacebook, FaTwitter } from "react-icons/fa";
+import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { footerNavData } from "../../data/footerData";
 import Logo from "../../components/common/UI/Logo/Logo";

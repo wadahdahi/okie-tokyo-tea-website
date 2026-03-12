@@ -8,7 +8,6 @@ import { useAppSelector } from "../../../hooks/useAppRedux";
 import { navLinks } from "../../../data/navData";
 import { NavLink } from "react-router-dom";
 import Button from "../../../components/common/UI/Button/Button";
-import { IMAGES } from "../../../constants/images";
 import { SHAPES } from "../../../constants/shapes";
 
 const MobileMenu: React.FC = () => {

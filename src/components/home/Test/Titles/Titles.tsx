@@ -2,9 +2,6 @@ interface TitleProps {
   title: string;
 }
 
-interface TitleType {
-  title: string;
-}
 
 export const titlesData: TitleProps[] = [
   {
@@ -27,12 +24,16 @@ export const titlesData: TitleProps[] = [
   },
 ];
 
-const Titles = ({ title }: TitleType) => {
-  {
-    titlesData.map((title) => (
-      <h3 className="title text-[24px]">{title.title}</h3>
-    ));
-  }
+const Titles = () => {
+  return (
+    <>
+      {titlesData.map((item, index) => (
+        <h3 key={index} className="title text-[24px]">
+          {item.title}
+        </h3>
+      ))}
+    </>
+  );
 };
 
 export default Titles;
