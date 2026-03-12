@@ -1,4 +1,5 @@
 import React from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { FaTimes, FaGlobe, FaSun, FaMoon, FaShoppingCart } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
@@ -28,7 +29,7 @@ const MobileMenu: React.FC = () => {
     }
   };
 
-  return (
+  const menuContent = (
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -37,7 +38,7 @@ const MobileMenu: React.FC = () => {
           exit="closed"
           variants={menuVariants}
           // HIGH TRANSPARENCY + STRONG BLUR
-          className="fixed inset-0 h-dvh w-full bg-brand-bg/40 backdrop-blur-2xl z-mobile-menu lg:hidden flex flex-col"
+          className="fixed top-0 left-0 h-dvh w-screen bg-brand-bg/40 backdrop-blur-2xl z-9999 lg:hidden flex flex-col"
         >
           {/* TOP BAR */}
           <div className="p-8 flex justify-between items-center border-b border-brand-border/10">
@@ -142,6 +143,8 @@ const MobileMenu: React.FC = () => {
       )}
     </AnimatePresence>
   );
+
+  return createPortal(menuContent, document.body);
 };
 
 export default MobileMenu;

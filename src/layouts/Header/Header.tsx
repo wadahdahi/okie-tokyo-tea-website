@@ -19,8 +19,9 @@ const Header: React.FC = () => {
   const { handleToggle: toggleMobileMenu } = useMobileMenu();
 
   return (
-    <header 
-      ref={headerRef}
+    <>
+      <header 
+        ref={headerRef}
       className={`fixed top-0 left-0 z-1001 w-full px-8 py-5 flex justify-between items-center border-b transition-all duration-500 ease-in-out shadow-sm
         ${isVisible ? 'translate-y-0' : '-translate-y-full'}
         ${isAtTop 
@@ -97,8 +98,9 @@ const Header: React.FC = () => {
       </div>
 
       {/* MOBILE OVERLAY MENU */}
+      </header>
       <MobileMenu />
-    </header>
+    </>
   );
 };
 
