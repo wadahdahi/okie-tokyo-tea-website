@@ -36,7 +36,7 @@ const BackToTop: React.FC = () => {
           transition={{ duration: 0.3, ease: "easeOut" }}
           onClick={scrollToTop}
           title="Back to Top"
-          className="fixed bottom-6 right-6 lg:bottom-10 lg:right-10 z-50 p-4 rounded-full bg-brand-accent text-brand-bg shadow-xl hover:bg-brand-deep hover:shadow-2xl active:scale-95 transition-all group flex items-center justify-center"
+          className="fixed bottom-14 right-6 lg:bottom-16 lg:right-10 z-1000 p-4 rounded-full bg-brand-accent/50 backdrop-blur-md text-brand-bg border border-brand-bg/30 shadow-xl hover:bg-brand-accent/80 hover:shadow-2xl active:scale-95 transition-all group flex items-center justify-center"
         >
           <FaArrowUp className="text-xl group-hover:-translate-y-1 transition-transform" />
         </motion.button>

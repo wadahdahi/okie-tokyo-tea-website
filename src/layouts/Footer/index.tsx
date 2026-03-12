@@ -108,7 +108,9 @@ const Footer: React.FC = () => {
 
       <div className="max-w-[1400px] mx-auto border-t border-brand-border mt-20 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-brand-muted font-black tracking-widest uppercase opacity-60">
         <p>© {new Date().getFullYear()} Okie Tokyo Tea. All rights reserved.</p>
-        <p>Designed with Zen and Purity in Japan.</p>
+        <p>
+          Front-end Developer: <span className="text-brand-accent ml-1">Wadah Dahi</span>
+        </p>
       </div>
     </footer>
   );
