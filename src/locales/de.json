@@ -1,0 +1,43 @@
+{
+  "common": {
+    "loading": "Laden...",
+    "error": "Ein Fehler ist aufgetreten",
+    "retry": "Wiederholen",
+    "back": "Zurück"
+  },
+  "nav": {
+    "home": "Startseite",
+    "products": "Produkte",
+    "contact": "Kontakt",
+    "about": "Über uns"
+  },
+  "hero": {
+    "cta_fixed": "Auswahl entdecken",
+    "slides": [
+      {
+        "badge": "Authentische Zeremonielle Qualität",
+        "title_main": "Die Reinheit von",
+        "title_highlight": "Japanischem Zen",
+        "description": "Handgepflückt aus den üppigen Hügeln von Uji, Kyoto. Erleben Sie die lebendige Energie und den ruhigen Fokus unseres erstklassigen, stein-gemahlenen Matcha."
+      },
+      {
+        "badge": "Natürlicher Energieschub",
+        "title_main": "Strahlen Sie",
+        "title_highlight": "von Innen",
+        "description": "Vollgepackt mit Antioxidantien und L-Theanin. Nachhaltiger Fokus ohne Zittern, perfekt für Ihr achtsames Ritual."
+      },
+      {
+        "badge": "Reiches Erbe",
+        "title_main": "Die Kunst der",
+        "title_highlight": "Teemeister",
+        "description": "Jahrhundertealte Tradition in jedem Schluck. Entdecken Sie das komplexe Geschmacksprofil des feinsten Grüntees der Welt."
+      }
+    ]
+  },
+  "header": {
+    "cart_title": "Einkaufstasche öffnen",
+    "theme_light": "Zum hellen Modus wechseln",
+    "theme_dark": "Zum dunklen Modus wechseln",
+    "scroll": "Scrollen"
+  }
+}

@@ -1,26 +1,22 @@
 import React, { useRef } from "react";
-import { FaShoppingCart, FaSun, FaMoon } from "react-icons/fa";
-import { useTheme } from "../../context/ThemeContext";
-import { useAppDispatch, useAppSelector } from "../../hooks/useAppRedux";
-import { toggleCart } from "../../redux/slices/uiSlice";
+import { FaShoppingCart, FaSun, FaMoon, FaGlobe, FaBars } from "react-icons/fa";
+import { useAppSelector } from "../../hooks/useAppRedux";
+import { useHeaderActions } from "../../hooks/useHeaderActions";
+import { useHeaderScroll } from "../../hooks/useHeaderScroll";
+import { useMobileMenu } from "../../hooks/useMobileMenu";
 import Button from "../../components/common/UI/Button/Button";
 import Logo from "../../components/common/UI/Logo/Logo";
 import Navbar from "./Navbar/Navbar";
-import { useHeaderScroll } from "../../hooks/useHeaderScroll";
+import MobileMenu from "./subcomponents/MobileMenu";
 
 const Header: React.FC = () => {
   const headerRef = useRef<HTMLElement>(null);
-  const { theme, toggleTheme } = useTheme();
-  const dispatch = useAppDispatch();
   const totalQuantity = useAppSelector((state) => state.cart.totalQuantity);
   
+  // DECOUPLED LOGIC
   const { isVisible, isAtTop } = useHeaderScroll(headerRef);
-
-  const handleThemeToggle = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggleTheme();
-  };
+  const { currentLang, theme, changeLanguage, handleToggleTheme, handleToggleCart } = useHeaderActions();
+  const { handleToggle: toggleMobileMenu } = useMobileMenu();
 
   return (
     <header 
@@ -33,16 +29,44 @@ const Header: React.FC = () => {
         }`}
     >
       <Logo />
-      <div className="flex items-center gap-6 lg:gap-10">
+
+      {/* MOBILE HAMBURGER BUTTON */}
+      <button
+        onClick={toggleMobileMenu}
+        className="lg:hidden text-brand-accent text-2xl p-2 hover:bg-brand-secondary rounded-xl transition-colors"
+        title="Toggle Menu"
+      >
+        <FaBars />
+      </button>
+
+      {/* DESKTOP CONTENT */}
+      <div className="hidden lg:flex items-center gap-10">
         <Navbar />
         <div className="flex gap-4 items-center shrink-0 min-w-max">
+          {/* LANGUAGE SELECTOR */}
+          <div className="relative flex items-center bg-brand-secondary border border-brand-border px-3 py-2 rounded-full hover:border-brand-accent transition-all group">
+            <FaGlobe className="text-brand-accent text-sm group-hover:rotate-12 transition-transform" />
+            <select
+              title="Select Language"
+              value={currentLang}
+              onChange={(e) => changeLanguage(e.target.value)}
+              className="bg-transparent text-xs font-black text-brand-text uppercase ml-2 cursor-pointer focus:outline-none appearance-none pr-4"
+            >
+              <option value="en">EN</option>
+              <option value="ar">AR</option>
+              <option value="de">DE</option>
+            </select>
+            <div className="absolute right-3 pointer-events-none text-[8px] text-brand-muted">▼</div>
+          </div>
+
+          {/* THEME TOGGLE */}
           <div className="flex items-center justify-center">
             <Button
               type="button"
               variant="secondary"
-              onClick={handleThemeToggle}
+              onClick={handleToggleTheme}
               title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-              className="w-12! h-12! p-0! rounded-full! flex! items-center! justify-center! text-xl shadow-lg border-2! border-brand-accent! bg-brand-secondary visible! opacity-100! relative z-20 hover:scale-110 active:scale-90 transition-all cursor-pointer"
+              className="w-12! h-12! p-0! rounded-full! flex! items-center! justify-center! text-xl shadow-lg border border-brand-accent/20! bg-brand-secondary visible! opacity-100! relative z-20 hover:scale-110 active:scale-90 transition-all cursor-pointer"
             >
               {theme === "light" ? (
                 <FaMoon className="text-brand-accent pointer-events-none" />
@@ -52,13 +76,14 @@ const Header: React.FC = () => {
             </Button>
           </div>
 
+          {/* CART TOGGLE */}
           <div className="flex items-center justify-center relative group">
             <Button
               type="button"
               variant="secondary"
-              onClick={() => dispatch(toggleCart())}
+              onClick={handleToggleCart}
               title="Open Shopping Bag"
-              className="w-12! h-12! p-0! rounded-full! relative flex! items-center! justify-center! text-xl shadow-md border-2 border-brand-border bg-brand-bg hover:border-brand-accent transition-all cursor-pointer"
+              className="w-12! h-12! p-0! rounded-full! relative flex! items-center! justify-center! text-xl shadow-md  border border-brand-accent/20! bg-brand-bg hover:border-brand-accent transition-all cursor-pointer"
             >
               <FaShoppingCart className="text-brand-accent group-hover:scale-110 transition-transform pointer-events-none" />
               {totalQuantity > 0 && (
@@ -70,6 +95,9 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* MOBILE OVERLAY MENU */}
+      <MobileMenu />
     </header>
   );
 };

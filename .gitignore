@@ -30,3 +30,7 @@ Desktop.ini
 # ENV
 .env
 .env*.local
+
+# Internal Planning
+BUSINESS_STRATEGY.md
+ROLES_MANAGEMENT.md

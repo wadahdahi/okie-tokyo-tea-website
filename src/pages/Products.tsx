@@ -36,6 +36,16 @@ const Products: React.FC = () => {
     });
   }, [searchQuery, activeCategory]);
 
+  // HANDLE RESPONSIVE SIBLING COUNT FOR PAGINATION
+  const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
+  React.useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const siblingCount = windowWidth < 640 ? 0 : 1;
+
   const {
     currentPage,
     currentItems,
@@ -44,7 +54,7 @@ const Products: React.FC = () => {
     prevPage,
     setPage,
     totalPageCount,
-  } = usePagination(filteredProducts, ITEMS_PER_PAGE);
+  } = usePagination(filteredProducts, ITEMS_PER_PAGE, siblingCount);
 
   // RESET PAGE ON FILTER CHANGE
   React.useEffect(() => {
@@ -52,7 +62,7 @@ const Products: React.FC = () => {
   }, [searchQuery, activeCategory, setPage]);
 
   return (
-    <div className="w-full mx-auto px-8 lg:px-16 xl:px-20 2xl:px-24 py-20">
+    <div className="w-full mx-auto px-6 md:px-16 lg:px-20 py-20">
       <SectionHeader
         title="Our Premium Collection"
         subtitle="Explore our curated selection of authentic Japanese matcha and handcrafted accessories for your daily ritual."
@@ -80,7 +90,7 @@ const Products: React.FC = () => {
 
       <div className={`grid gap-8 py-8 transition-all duration-500 ${
         view === "grid" 
-          ? "grid-cols-2 tab:grid-cols-3" 
+          ? "grid-cols-1 md:grid-cols-2 tab:grid-cols-3" 
           : "grid-cols-1"
       }`}>
         <AnimatePresence mode="wait">
@@ -104,27 +114,35 @@ const Products: React.FC = () => {
 
       {/* PAGINATION */}
       {totalPageCount > 1 && (
-        <div className="flex justify-center items-center gap-3 mt-20">
+        <div className="flex justify-center items-center flex-wrap gap-2 md:gap-3 mt-12 md:mt-20">
           <Button
+            type="button"
             variant="secondary"
             size="sm"
-            onClick={prevPage}
+            onClick={(e) => {
+              e.preventDefault();
+              prevPage();
+            }}
             disabled={currentPage === 1}
-            className="p-4!"
+            className="p-3! md:p-4!"
             title="Previous Page"
           >
-            <FaChevronLeft />
+            <FaChevronLeft className="text-sm md:text-base text-brand-accent" />
           </Button>
 
-          <div className="flex gap-2">
+          <div className="flex flex-wrap justify-center gap-1 md:gap-2">
             {paginationRange?.map((page, i) => (
               <Button
                 key={i}
+                type="button"
                 variant={currentPage === page ? "primary" : "ghost"}
                 size="sm"
-                onClick={() => typeof page === "number" && setPage(page)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (typeof page === "number") setPage(page);
+                }}
                 disabled={page === "..."}
-                className={`w-12! h-12! p-0! ${currentPage === page ? "shadow-lg shadow-brand-accent/30 scale-110 font-black" : "font-bold text-brand-muted"}`}
+                className={`w-10! h-10! md:w-12! md:h-12! p-0! rounded-xl! ${currentPage === page ? "shadow-lg shadow-brand-accent/30 scale-105 md:scale-110 font-black text-xs md:text-base" : "font-bold text-brand-muted text-xs md:text-base"}`}
               >
                 {page}
               </Button>
@@ -132,14 +150,18 @@ const Products: React.FC = () => {
           </div>
 
           <Button
+            type="button"
             variant="secondary"
             size="sm"
-            onClick={nextPage}
+            onClick={(e) => {
+              e.preventDefault();
+              nextPage();
+            }}
             disabled={currentPage === totalPageCount}
-            className="p-4!"
+            className="p-3! md:p-4!"
             title="Next Page"
           >
-            <FaChevronRight />
+            <FaChevronRight className="text-sm md:text-base text-brand-accent" />
           </Button>
         </div>
       )}

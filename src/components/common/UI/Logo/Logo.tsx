@@ -6,10 +6,15 @@ type LogoProps = {
 
 export default function Logo({ className }: LogoProps) {
   return (
-    <img
-      src={SHAPES.LOGO.OKIE_LOGO_LIGHT}
-      alt="okie-tokyo-tea logo"
-      className={`${className} w-40`}
-    />
+    <div className="relative inline-block">
+      <img
+        src={SHAPES.LOGO.OKIE_LOGO_LIGHT}
+        alt="Okie Tokyo Tea logo"
+        className={`${className} w-40`}
+      />
+      <span className="absolute top-1 -right-2 text-[12px] font-black text-brand-accent/80">
+        ™
+      </span>
+    </div>
   );
 }

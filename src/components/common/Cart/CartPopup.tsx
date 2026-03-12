@@ -14,6 +14,18 @@ const CartPopup: React.FC = () => {
 
   const isEmpty = items.length === 0;
 
+  // SCROLL LOCK LOGIC
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
   const handleConfirmOrder = () => {
     dispatch(setCartOpen(false));
     navigate("/checkout");

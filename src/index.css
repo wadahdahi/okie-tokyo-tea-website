@@ -24,6 +24,8 @@
   /* Z-INDEX TOKENS (Tailwind 4 format) */
   --z-header: 100;
   --z-modal: 1000;
+  --z-overlay: 2000;
+  --z-mobile-menu: 2001;
 }
 
 :root {

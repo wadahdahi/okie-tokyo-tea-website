@@ -1,9 +1,17 @@
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { navLinks } from "../../../data/navData";
 
 const Navbar = () => {
+  const { t } = useTranslation();
+
+  // MAP PATHS TO TRANSLATION KEYS
+  const getTranslationKey = (label: string) => {
+    return `nav.${label.toLowerCase()}`;
+  };
+
   return (
-    <nav className="hidden md:block">
+    <nav className="hidden lg:block">
       <ul className="flex gap-6 lg:gap-8 items-center m-0 p-0 list-none">
         {navLinks.map((link) => (
           <li key={link.path}>
@@ -17,7 +25,7 @@ const Navbar = () => {
                     ${isActive ? "text-brand-accent after:scale-x-100" : "after:scale-x-0"}
                   `}
             >
-              {link.label}
+              {t(getTranslationKey(link.label))}
             </NavLink>
           </li>
         ))}
