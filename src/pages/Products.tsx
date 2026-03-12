@@ -7,72 +7,142 @@ import { usePagination } from "../hooks/usePagination";
 import ProductCard from "../components/products/ProductCard/ProductCard";
 import Button from "../components/common/UI/Button/Button";
 
+import SearchBar from "../components/common/UI/SearchBar";
+import FilterBar from "../components/common/UI/FilterBar";
+import ViewToggle from "../components/common/UI/ViewToggle";
+
 const ITEMS_PER_PAGE = 6;
 
+const CATEGORIES = [
+  { label: "All Products", value: "all" },
+  { label: "Ceremonial", value: "ceremonial" },
+  { label: "Premium", value: "premium" },
+  { label: "Culinary", value: "culinary" },
+];
+
 const Products: React.FC = () => {
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [activeCategory, setActiveCategory] = React.useState("all");
+  const [view, setView] = React.useState<"grid" | "list">("grid");
+
+  const filteredProducts = React.useMemo(() => {
+    return productsData.filter((product) => {
+      const matchesSearch = product.name
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+      const matchesCategory =
+        activeCategory === "all" || product.category === activeCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [searchQuery, activeCategory]);
+
   const {
     currentPage,
     currentItems,
-    getPaginationGroup,
+    paginationRange,
     nextPage,
     prevPage,
     setPage,
-    totalPages,
-  } = usePagination(productsData, ITEMS_PER_PAGE);
+    totalPageCount,
+  } = usePagination(filteredProducts, ITEMS_PER_PAGE);
+
+  // RESET PAGE ON FILTER CHANGE
+  React.useEffect(() => {
+    setPage(1);
+  }, [searchQuery, activeCategory, setPage]);
 
   return (
-    <div className="max-w-[1400px] mx-auto px-8 py-20">
+    <div className="w-full mx-auto px-8 lg:px-16 xl:px-20 2xl:px-24 py-20">
       <SectionHeader
         title="Our Premium Collection"
         subtitle="Explore our curated selection of authentic Japanese matcha and handcrafted accessories for your daily ritual."
         hasBorder
       />
 
-      <div className="matcha-grid">
+      {/* CONTROLS */}
+      <div className="flex flex-col xl:flex-row justify-between items-start gap-8 mb-16 bg-brand-secondary/30 p-6 rounded-4xl border border-brand-border/50">
+        <div className="flex flex-col md:flex-col items-start gap-8 w-full xl:w-auto">
+          <SearchBar
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder="What are you looking for?"
+            className="w-full md:max-w-md"
+          />
+          <FilterBar
+            options={CATEGORIES}
+            activeValue={activeCategory}
+            onChange={setActiveCategory}
+          />
+        </div>
+        
+        <ViewToggle view={view} onChange={setView} />
+      </div>
+
+      <div className={`grid gap-8 py-8 transition-all duration-500 ${
+        view === "grid" 
+          ? "grid-cols-2 tab:grid-cols-3" 
+          : "grid-cols-1"
+      }`}>
         <AnimatePresence mode="wait">
-          {currentItems.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {currentItems.length > 0 ? (
+            currentItems.map((product) => (
+              <ProductCard 
+                key={product.id} 
+                product={product} 
+                layout={view}
+              />
+            ))
+          ) : (
+            <div className="col-span-full py-20 text-center">
+              <p className="text-2xl font-bold text-brand-muted italic">
+                No products found matching your search...
+              </p>
+            </div>
+          )}
         </AnimatePresence>
       </div>
 
       {/* PAGINATION */}
-      <div className="flex justify-center items-center gap-3 mt-20">
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={prevPage}
-          disabled={currentPage === 1}
-          className="p-4!"
-        >
-          <FaChevronLeft />
-        </Button>
+      {totalPageCount > 1 && (
+        <div className="flex justify-center items-center gap-3 mt-20">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={prevPage}
+            disabled={currentPage === 1}
+            className="p-4!"
+            title="Previous Page"
+          >
+            <FaChevronLeft />
+          </Button>
 
-        <div className="flex gap-2">
-          {getPaginationGroup().map((page, i) => (
-            <Button
-              key={i}
-              variant={currentPage === page ? "primary" : "ghost"}
-              size="sm"
-              onClick={() => typeof page === "number" && setPage(page)}
-              disabled={page === "..."}
-              className={`w-12! h-12! p-0! ${currentPage === page ? "shadow-lg shadow-brand-accent/30 scale-110" : ""}`}
-            >
-              {page}
-            </Button>
-          ))}
+          <div className="flex gap-2">
+            {paginationRange?.map((page, i) => (
+              <Button
+                key={i}
+                variant={currentPage === page ? "primary" : "ghost"}
+                size="sm"
+                onClick={() => typeof page === "number" && setPage(page)}
+                disabled={page === "..."}
+                className={`w-12! h-12! p-0! ${currentPage === page ? "shadow-lg shadow-brand-accent/30 scale-110 font-black" : "font-bold text-brand-muted"}`}
+              >
+                {page}
+              </Button>
+            ))}
+          </div>
+
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={nextPage}
+            disabled={currentPage === totalPageCount}
+            className="p-4!"
+            title="Next Page"
+          >
+            <FaChevronRight />
+          </Button>
         </div>
-
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={nextPage}
-          disabled={currentPage === totalPages}
-          className="p-4!"
-        >
-          <FaChevronRight />
-        </Button>
-      </div>
+      )}
     </div>
   );
 };

@@ -1,47 +1,83 @@
-import { useState } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 
-export const usePagination = <T,>(items: T[], itemsPerPage: number) => {
+export const DOTS = '...';
+
+const range = (start: number, end: number) => {
+  let length = end - start + 1;
+  return Array.from({ length }, (_, idx) => idx + start);
+};
+
+// COMPACT PAGINATION HOOK
+export const usePagination = <T,>(
+  items: T[],
+  pageSize: number,
+  siblingCount = 0
+) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(items.length / itemsPerPage);
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = items.slice(startIndex, startIndex + itemsPerPage);
+  const totalCount = items.length;
+  const totalPageCount = Math.ceil(totalCount / pageSize);
 
-  const getPaginationGroup = () => {
-    const pages: (number | string)[] = [];
-    if (totalPages <= 5) {
-      for (let i = 1; i <= totalPages; i++) pages.push(i);
-    } else {
-      pages.push(1);
-      if (currentPage > 3) pages.push('...');
-      
-      const start = Math.max(2, currentPage - 1);
-      const end = Math.min(totalPages - 1, currentPage + 1);
-      
-      for (let i = start; i <= end; i++) {
-        if (!pages.includes(i)) pages.push(i);
-      }
-      
-      if (currentPage < totalPages - 2) pages.push('...');
-      if (!pages.includes(totalPages)) pages.push(totalPages);
+  const paginationRange = useMemo(() => {
+    const totalPageNumbers = siblingCount + 5;
+
+    if (totalPageNumbers >= totalPageCount) {
+      return range(1, totalPageCount);
     }
-    return pages;
-  };
 
-  const setPage = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
+    const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
+    const rightSiblingIndex = Math.min(currentPage + siblingCount, totalPageCount);
+
+    const shouldShowLeftDots = leftSiblingIndex > 2;
+    const shouldShowRightDots = rightSiblingIndex < totalPageCount - 2;
+
+    const firstPageIndex = 1;
+    const lastPageIndex = totalPageCount;
+
+    if (!shouldShowLeftDots && shouldShowRightDots) {
+      let leftItemCount = 3 + siblingCount;
+      let leftRange = range(1, leftItemCount);
+      return [...leftRange, DOTS, totalPageCount];
+    }
+
+    if (shouldShowLeftDots && !shouldShowRightDots) {
+      let rightItemCount = 3 + siblingCount;
+      let rightRange = range(totalPageCount - rightItemCount + 1, totalPageCount);
+      return [firstPageIndex, DOTS, ...rightRange];
+    }
+
+    if (shouldShowLeftDots && shouldShowRightDots) {
+      let middleRange = range(leftSiblingIndex, rightSiblingIndex);
+      return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
+    }
+  }, [totalCount, pageSize, siblingCount, currentPage]);
+
+  const currentItems = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
+    return items.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, pageSize, items]);
+
+  const setPage = useCallback((page: number) => {
+    if (page >= 1 && page <= totalPageCount) {
       setCurrentPage(page);
     }
-  };
+  }, [totalPageCount]);
 
-  const nextPage = () => setCurrentPage((p) => Math.min(totalPages, p + 1));
-  const prevPage = () => setCurrentPage((p) => Math.max(1, p - 1));
+  const nextPage = useCallback(() => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPageCount));
+  }, [totalPageCount]);
+
+  const prevPage = useCallback(() => {
+    setCurrentPage((prev) => Math.max(prev - 1, 1));
+  }, []);
 
   return {
     currentPage,
-    totalPages,
+    totalCount,
+    totalPageCount,
+    paginationRange,
     currentItems,
-    getPaginationGroup,
     setPage,
     nextPage,
     prevPage,

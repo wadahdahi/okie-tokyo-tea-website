@@ -7,12 +7,12 @@ const Features: React.FC = () => {
   return (
     <section className="max-w-[1400px] mx-auto px-8 xl:px-12 2xl:px-20">
       <SectionHeader
-        title="The Story Behind the Leaf 🌱"
+        title="The Story Behind the Leaf"
         subtitle="From the mist-covered hills of Uji to your daily ritual. We bridge centuries of tradition with modern elegance."
         hasBorder
       />
 
-      <div className="matcha-grid">
+      <div className="grid grid-cols-1 lap:grid-cols-2 desk:grid-cols-3 gap-8 py-8">
         {featuresData.map((item, index) => {
           const Icon = item.icon;
           return (

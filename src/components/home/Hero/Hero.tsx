@@ -1,12 +1,22 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
 import Button from "../../../components/common/UI/Button/Button";
 import { IMAGES } from "../../../constants/images";
 
 const Hero: React.FC = () => {
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="relative h-[90vh] flex items-center justify-center px-8 bg-brand-secondary pattern-bg group overflow-hidden">
+    <section className="relative h-[90vh] flex items-center justify-center px-8 bg-brand-secondary bg-cover bg-center bg-no-repeat group overflow-hidden">
       <div className="absolute inset-0 bg-brand-secondary/40 pointer-events-none transition-opacity group-hover:opacity-20 z-10"></div>
       <div className="absolute inset-0 w-full">
         <img
@@ -71,8 +81,38 @@ const Hero: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* DECORATIVE CURVE */}
-      <div className="absolute -bottom-1 left-0 w-full h-24 bg-brand-bg rounded-[100%_100%_0_0] z-30"></div>
+      {/* DECORATIVE CURVE & SCROLL INDICATOR */}
+      <div className="absolute -bottom-1 left-0 w-full h-24 bg-brand-bg rounded-[100%_100%_0_0] z-30 flex justify-center">
+        <AnimatePresence>
+          {!isScrolled && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.2, delay: 0 } }}
+              transition={{ delay: 2, duration: 1 }}
+              className="absolute top-2 flex flex-col items-center gap-1 scale-75"
+            >
+              <div className="w-[30px] h-[50px] border-2 border-brand-accent/20 rounded-full p-1.5 flex justify-center">
+                <motion.div
+                  animate={{ 
+                    y: [0, 20, 0],
+                    opacity: [1, 0, 1]
+                  }}
+                  transition={{ 
+                    duration: 2.5, 
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="w-1.5 h-1.5 bg-brand-accent rounded-full"
+                />
+              </div>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-accent/30 translate-y-2">
+                Scroll
+              </span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </section>
   );
 };

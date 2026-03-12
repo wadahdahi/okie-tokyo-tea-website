@@ -17,7 +17,8 @@
   --color-brand-card: var(--card-bg);
 
   /* BREAKPOINTS - USER SPECIFIC */
-  --breakpoint-lap: 1280px;
+  --breakpoint-tab: 1280px;
+  --breakpoint-lap: 1440px;
   --breakpoint-desk: 1920px;
 
   /* Z-INDEX TOKENS (Tailwind 4 format) */
@@ -88,27 +89,4 @@
 }
 
 @layer utilities {
-  .pattern-bg {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  /* RESPONSIVE GRID - 1920 / 1280 / MOBILE */
-  .matcha-grid {
-    @apply grid gap-8 py-8;
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 1280px) {
-    .matcha-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 1920px) {
-    .matcha-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
 }

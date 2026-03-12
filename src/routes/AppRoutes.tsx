@@ -2,6 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home";
 import Products from "../pages/Products";
+import Checkout from "../pages/Checkout";
+import Contact from "../pages/Contact";
 
 const AppRoutes = () => {
   return (
@@ -9,10 +11,8 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
-        <Route
-          path="/contact"
-          element={<div>Contact Page (Coming Soon)</div>}
-        />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </MainLayout>
   );

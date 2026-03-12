@@ -12,8 +12,8 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-brand-secondary pt-24 pb-12 px-8 border-t border-brand-border transition-all">
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
+    <footer className="bg-brand-secondary pt-24 pb-12 px-8 md:px-12 2xl:px-24 border-t border-brand-border transition-all">
+      <div className="w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
         <div className="max-w-xs">
           <Logo className="w-[260px]" />
           <p className="text-brand-muted leading-relaxed mb-10 pl-[10px] font-medium">
@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
           <h4 className="text-[18px] font-black uppercase tracking-[0.2em] mb-8 text-brand-text/50">
             Quick Links
           </h4>
-          <ul className="space-y-4 list-none p-0 m-0">
+          <ul className="space-y-2 list-none p-0 m-0">
             {footerNavData.quickLinks.map((link) => (
               <li key={link.path}>
                 <Link
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
           <h4 className="text-[18px] font-black uppercase tracking-[0.2em] mb-8 text-brand-text/50">
             Guide
           </h4>
-          <ul className="space-y-4 list-none p-0 m-0">
+          <ul className="space-y-2 list-none p-0 m-0">
             {footerNavData.guides.map((link, i) => (
               <li key={i}>
                 <Link
@@ -77,9 +77,9 @@ const Footer: React.FC = () => {
           <h4 className="text-[18px] font-black uppercase tracking-[0.2em] mb-8 text-brand-text/50">
             Contact
           </h4>
-          <div className="space-y-4">
+          <div className="space-y-2">
             <div>
-              <p className="text-brand-text font-black text-sm mb-1 uppercase tracking-wider">
+              <p className="text-brand-text font-black text-sm uppercase tracking-wider">
                 Origin
               </p>
               <p className="text-brand-muted font-bold italic">
@@ -87,7 +87,7 @@ const Footer: React.FC = () => {
               </p>
             </div>
             <div>
-              <p className="text-brand-text font-black text-sm mb-1 uppercase tracking-wider">
+              <p className="text-brand-text font-black text-sm uppercase tracking-wider">
                 Email
               </p>
               <Link

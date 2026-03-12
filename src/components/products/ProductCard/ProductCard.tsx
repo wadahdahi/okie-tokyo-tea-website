@@ -6,19 +6,31 @@ import Button from "../../common/UI/Button/Button";
 
 interface ProductCardProps {
   product: Product;
+  layout?: "grid" | "list";
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+import { useDispatch } from "react-redux";
+import { addItem } from "../../../redux/slices/cartSlice";
+
+const ProductCard: React.FC<ProductCardProps> = ({ product, layout = "grid" }) => {
+  const isList = layout === "list";
+  const dispatch = useDispatch();
+
+  const handleAddToBag = () => {
+    dispatch(addItem(product));
+  };
+
   return (
     <motion.div
-      layout
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.3 }}
-      className="bg-brand-card rounded-3xl overflow-hidden border border-brand-border flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className={`bg-brand-card rounded-3xl overflow-hidden border border-brand-border hover:border-brand-accent/30 hover:shadow-2xl transition-all duration-300 group flex ${
+        isList ? "flex-row items-center p-6 gap-8" : "flex-col"
+      }`}
     >
-      <div className="h-[300px] overflow-hidden bg-brand-secondary flex items-center justify-center p-6 relative">
+      <div className={`overflow-hidden bg-brand-secondary flex items-center justify-center p-4 relative shrink-0 ${
+        isList ? "w-48 h-48 rounded-2xl" : "h-[240px]"
+      }`}>
         <img
           src={product.image}
           alt={product.name}
@@ -31,28 +43,29 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
       </div>
 
-      <div className="p-8 flex-1 flex flex-col">
-        <div className="flex justify-between items-center mb-3">
-          <h3 className="text-xl font-black text-brand-text tracking-tight group-hover:text-brand-accent transition-colors">
+      <div className={`flex-1 flex flex-col ${isList ? "text-left" : "p-6"}`}>
+        <div className="flex justify-between items-center mb-2 gap-4">
+          <h3 className="text-lg font-black text-brand-text tracking-tight group-hover:text-brand-accent transition-colors">
             {product.name}
           </h3>
-          <div className="flex items-center gap-1 text-yellow-500 text-sm font-bold bg-yellow-500/5 px-2 py-1 rounded-lg">
+          <div className="flex items-center gap-1 text-yellow-500 text-sm font-bold bg-yellow-500/5 px-2 py-1 rounded-lg shrink-0">
             <FaStar /> {product.rating}
           </div>
         </div>
 
-        <p className="text-brand-muted text-sm mb-8 flex-1 leading-relaxed font-medium">
+        <p className={`text-brand-muted text-xs mb-6 flex-1 leading-relaxed font-medium ${isList ? "" : "line-clamp-2"}`}>
           {product.description}
         </p>
 
-        <div className="flex justify-between items-center pt-6 border-t border-brand-border/50">
-          <span className="text-2xl font-black text-brand-text">
+        <div className={`flex justify-between items-center pt-4 border-t border-brand-border/50 ${isList ? "mt-0" : "mt-auto"}`}>
+          <span className="text-xl font-black text-brand-text">
             ${product.price.toFixed(2)}
           </span>
           <Button
             variant="primary"
             size="md"
-            className="gap-2 shadow-brand-accent/20"
+            className="gap-2 shadow-brand-accent/20 px-8"
+            onClick={handleAddToBag}
           >
             <FaShoppingCart /> Add
           </Button>

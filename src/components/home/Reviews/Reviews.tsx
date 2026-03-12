@@ -13,7 +13,7 @@ const Reviews: React.FC = () => {
           subtitle="Shared experiences from our global family of matcha enthusiasts."
         />
 
-        <div className="matcha-grid">
+        <div className="grid grid-cols-1 lap:grid-cols-2 desk:grid-cols-3 gap-8 py-8">
           {reviewsData.map((review, i) => (
             <motion.div
               key={i}
