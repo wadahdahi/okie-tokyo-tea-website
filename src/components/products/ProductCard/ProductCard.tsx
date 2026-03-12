@@ -11,10 +11,14 @@ interface ProductCardProps {
 
 import { useDispatch } from "react-redux";
 import { addItem } from "../../../redux/slices/cartSlice";
+import { useAppSelector } from "../../../hooks/useAppRedux";
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, layout = "grid" }) => {
   const isList = layout === "list";
   const dispatch = useDispatch();
+  const cartItems = useAppSelector(state => state.cart.items);
+  const cartItem = cartItems.find(item => item.id === product.id);
+  const quantityInCart = cartItem ? cartItem.quantity : 0;
 
   const handleAddToBag = () => {
     dispatch(addItem(product));
@@ -24,51 +28,68 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, layout = "grid" }) =
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className={`bg-brand-card rounded-3xl overflow-hidden border border-brand-border hover:border-brand-accent/30 hover:shadow-2xl transition-all duration-300 group flex ${
-        isList ? "flex-row items-center p-6 gap-8" : "flex-col"
+      className={`bg-brand-card overflow-hidden border border-brand-border hover:border-brand-accent/30 hover:shadow-2xl transition-all duration-300 group flex ${
+        isList 
+          ? "flex-row items-center p-3 sm:p-6 gap-4 sm:gap-8 rounded-2xl" 
+          : "flex-col rounded-3xl"
       }`}
     >
-      <div className={`overflow-hidden bg-brand-secondary flex items-center justify-center p-4 relative shrink-0 ${
-        isList ? "w-48 h-48 rounded-2xl" : "h-[240px]"
+      <div className={`overflow-hidden bg-brand-secondary flex items-center justify-center relative shrink-0 ${
+        isList 
+          ? "w-20 h-20 sm:w-48 sm:h-48 rounded-xl sm:rounded-2xl p-2 sm:p-4" 
+          : "h-[240px] p-4"
       }`}>
         <img
           src={product.image}
           alt={product.name}
           className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
         />
-        <div className="absolute top-4 left-4">
+        <div className={`absolute top-2 left-2 sm:top-4 sm:left-4 ${isList ? "hidden sm:block" : ""}`}>
           <span className="bg-brand-accent/10 backdrop-blur-md text-brand-accent text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase">
             {product.category}
           </span>
         </div>
       </div>
 
-      <div className={`flex-1 flex flex-col ${isList ? "text-left" : "p-6"}`}>
-        <div className="flex justify-between items-center mb-2 gap-4">
-          <h3 className="text-lg font-black text-brand-text tracking-tight group-hover:text-brand-accent transition-colors">
-            {product.name}
-          </h3>
-          <div className="flex items-center gap-1 text-yellow-500 text-sm font-bold bg-yellow-500/5 px-2 py-1 rounded-lg shrink-0">
-            <FaStar /> {product.rating}
+      <div className={`flex-1 flex flex-col w-full h-full justify-between ${isList ? "text-left py-1" : "p-6"}`}>
+        <div>
+          <div className={`flex justify-between items-start md:items-center gap-2 sm:gap-4 mb-1`}>
+            <h3 className={`${isList ? "text-base sm:text-lg" : "text-lg"} font-black text-brand-text tracking-tight group-hover:text-brand-accent transition-colors line-clamp-1`}>
+              {product.name}
+            </h3>
+            <div className={`flex items-center gap-1 text-yellow-500 font-bold bg-yellow-500/5 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-md shrink-0 ${isList ? "text-[10px] sm:text-sm" : "text-sm"}`}>
+              <FaStar /> <span>{product.rating}</span>
+            </div>
           </div>
+
+          <p className={`text-brand-muted text-xs mb-3 flex-1 leading-relaxed font-medium ${isList ? "hidden sm:-webkit-box sm:line-clamp-2" : "line-clamp-2"}`}>
+            {product.description}
+          </p>
         </div>
 
-        <p className={`text-brand-muted text-xs mb-6 flex-1 leading-relaxed font-medium ${isList ? "" : "line-clamp-2"}`}>
-          {product.description}
-        </p>
-
-        <div className={`flex justify-between items-center pt-4 border-t border-brand-border/50 ${isList ? "mt-0" : "mt-auto"}`}>
-          <span className="text-xl font-black text-brand-text">
+        <div className={`flex justify-between items-center ${isList ? "pt-2 border-t border-brand-border/30 mt-auto" : "pt-4 border-t border-brand-border/50 mt-auto"}`}>
+          <span className={`${isList ? "text-base sm:text-xl" : "text-xl"} font-black text-brand-text`}>
             ${product.price.toFixed(2)}
           </span>
-          <Button
-            variant="primary"
-            size="md"
-            className="gap-2 shadow-brand-accent/20 px-8"
-            onClick={handleAddToBag}
-          >
-            <FaShoppingCart /> Add
-          </Button>
+          <div className="relative">
+            <Button
+              variant="primary"
+              size={isList ? "sm" : "md"}
+              className={`gap-2 shadow-brand-accent/20 ${isList ? "px-3 py-1.5 sm:px-8 text-xs sm:text-base rounded-lg sm:rounded-xl" : "px-8"}`}
+              onClick={handleAddToBag}
+            >
+              <FaShoppingCart /> <span className={isList ? "hidden sm:inline" : ""}>Add</span>
+            </Button>
+            {quantityInCart > 0 && (
+              <motion.span 
+                initial={{ scale: 0 }} 
+                animate={{ scale: 1 }} 
+                className={`absolute -top-2 -right-2 flex items-center justify-center bg-brand-accent text-white font-black rounded-full shadow-md z-10 ${isList ? "w-4 h-4 text-[9px]" : "w-6 h-6 text-xs"}`}
+              >
+                {quantityInCart}
+              </motion.span>
+            )}
+          </div>
         </div>
       </div>
     </motion.div>
