@@ -5,10 +5,11 @@ import Products from "../pages/Products";
 import Checkout from "../pages/Checkout";
 import Contact from "../pages/Contact";
 import ScrollToTop from "../components/common/ScrollToTop/ScrollToTop";
+import { SmoothScroll } from "../components/common/Scroll/SmoothScroll";
 
 const AppRoutes = () => {
   return (
-    <>
+    <SmoothScroll>
       <ScrollToTop />
       <MainLayout>
         <Routes>
@@ -18,7 +19,7 @@ const AppRoutes = () => {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </MainLayout>
-    </>
+    </SmoothScroll>
   );
 };
 

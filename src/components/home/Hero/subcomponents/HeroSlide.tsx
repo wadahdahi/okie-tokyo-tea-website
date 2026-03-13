@@ -23,7 +23,7 @@ const HeroSlide: React.FC<HeroSlideProps> = ({ index, image, isRTL }) => {
       transition={{ duration: 0.8 }}
       className="grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-16 w-full"
     >
-      <div className={`flex flex-col ${isRTL ? 'lg:items-end lg:text-right' : 'lg:items-start lg:text-left'} items-center text-center`}>
+      <div className={`flex flex-col items-start ${isRTL ? 'text-right' : 'text-left'} w-full`}>
         <motion.span 
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}

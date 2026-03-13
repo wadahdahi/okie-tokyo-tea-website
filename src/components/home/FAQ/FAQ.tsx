@@ -11,7 +11,7 @@ const FAQ: React.FC = () => {
         hasBorder
       />
 
-      <div className="grid grid-cols-1 tab:grid-cols-2 desk:grid-cols-3 gap-8 py-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 desk:grid-cols-3 gap-8 py-8">
         {faqData.map((faq, i) => (
           <div
             key={i}
