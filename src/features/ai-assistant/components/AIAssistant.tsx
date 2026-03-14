@@ -48,7 +48,7 @@ const AIAssistant: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-32 right-6 lg:bottom-36 lg:right-10 z-[1002]">
+    <div className="relative">
       {/* CHAT WINDOW */}
       <AnimatePresence>
         {isOpen && (
@@ -56,7 +56,7 @@ const AIAssistant: React.FC = () => {
             initial={{ opacity: 0, y: 20, scale: 0.9, transformOrigin: "bottom right" }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="absolute bottom-20 right-0 w-[350px] sm:w-[400px] h-[550px] bg-brand-card/95 backdrop-blur-2xl border border-brand-border shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] rounded-[2.5rem] flex flex-col overflow-hidden"
+            className="absolute bottom-20 right-0 w-[350px] sm:w-[400px] h-[550px] max-h-[70vh] sm:max-h-[75vh] bg-brand-card/95 backdrop-blur-2xl border border-brand-border shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] rounded-[2.5rem] flex flex-col overflow-hidden"
           >
             {/* HEADER */}
             <div className="p-6 bg-brand-accent text-white flex justify-between items-center">

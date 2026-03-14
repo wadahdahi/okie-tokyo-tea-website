@@ -30,15 +30,15 @@ const BackToTop: React.FC = () => {
     <AnimatePresence>
       {isVisible && (
         <motion.button
-          initial={{ opacity: 0, y: 20, scale: 0.5 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.5 }}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.5 }}
           whileHover={{ scale: 1.1, y: -5 }}
           whileTap={{ scale: 0.9 }}
           transition={{ type: "spring", stiffness: 400, damping: 30 }}
           onClick={scrollToTop}
           title="Back to Top"
-          className="fixed bottom-14 right-6 lg:bottom-16 lg:right-10 z-1000 p-4 rounded-full bg-brand-accent/60 backdrop-blur-xl text-white border border-white/20 shadow-2xl hover:bg-brand-accent transition-colors flex items-center justify-center cursor-pointer"
+          className="p-4 rounded-full bg-brand-accent/60 backdrop-blur-xl text-white border border-white/20 shadow-2xl hover:bg-brand-accent transition-colors flex items-center justify-center cursor-pointer"
         >
           <FaArrowUp className="text-xl" />
         </motion.button>
