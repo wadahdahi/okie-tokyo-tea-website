@@ -71,10 +71,10 @@ const RegionSwitcher: React.FC<RegionSwitcherProps> = ({ variant = "default" }) 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            initial={{ opacity: 0, y: isCompact ? -10 : 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            className="absolute top-full mt-2 right-0 w-48 bg-brand-card border border-brand-border rounded-2xl shadow-2xl z-50 overflow-hidden"
+            exit={{ opacity: 0, y: isCompact ? -10 : 10, scale: 0.95 }}
+            className={`absolute ${isCompact ? "bottom-full mb-4" : "top-full mt-2"} right-0 w-48 bg-brand-card border border-brand-border rounded-2xl shadow-2xl z-50 overflow-hidden ${isCompact ? "origin-bottom" : "origin-top"}`}
           >
             <div className="p-2">
               <p className="text-[9px] font-black uppercase tracking-widest text-brand-muted px-3 py-2">

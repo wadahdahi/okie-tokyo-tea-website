@@ -87,6 +87,15 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    
+    ::selection {
+      background: #5dcf65;
+      color: #f1f8e9;
+      [data-theme="dark"]::selection {
+        background: var(--color-brand-card);
+        color: var(--brand-bg);
+      }
+    }
   }
 }
 
