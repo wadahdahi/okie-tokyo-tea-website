@@ -2,19 +2,24 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { store } from "./redux/store/store";
-import AppRoutes from "./routes/AppRoutes";
-import { ThemeProvider } from "./context/ThemeContext";
-import "./index.css";
-import "./i18n";
+import { store } from "./app/providers/store";
+import AppRoutes from "./app/router/AppRoutes";
+import { ThemeProvider } from "./app/providers/ThemeContext";
+import { RegionProvider } from "./app/providers/RegionContext";
+import SplashScreen from "./shared/components/SplashScreen";
+import "./app/styles/index.css";
+import "./shared/lib/i18n";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider>
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
+        <RegionProvider>
+          <SplashScreen />
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
+        </RegionProvider>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,
