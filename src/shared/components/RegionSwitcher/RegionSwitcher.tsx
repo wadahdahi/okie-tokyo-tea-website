@@ -3,10 +3,22 @@ import { useRegion, Region } from "../../../app/providers/RegionContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronDown, FaCheck } from "react-icons/fa";
 
-const regions: { id: Region; label: string; flag: string }[] = [
+const SyrianFlag = () => (
+  <span className="flex flex-col w-5 h-3.5 shrink-0 overflow-hidden rounded-[2px] shadow-sm border border-black/10">
+    <span className="bg-[#007A3D] h-1/3 w-full"></span>
+    <span className="bg-white h-1/3 w-full flex justify-center items-center gap-[2px]">
+      <span className="w-1 h-1 bg-red-600 [clip-path:polygon(50%_0%,61%_35%,98%_35%,68%_57%,79%_91%,50%_70%,21%_91%,32%_57%,2%_35%,39%_35%)]"></span>
+      <span className="w-1 h-1 bg-red-600 [clip-path:polygon(50%_0%,61%_35%,98%_35%,68%_57%,79%_91%,50%_70%,21%_91%,32%_57%,2%_35%,39%_35%)]"></span>
+      <span className="w-1 h-1 bg-red-600 [clip-path:polygon(50%_0%,61%_35%,98%_35%,68%_57%,79%_91%,50%_70%,21%_91%,32%_57%,2%_35%,39%_35%)]"></span>
+    </span>
+    <span className="bg-black h-1/3 w-full"></span>
+  </span>
+);
+
+const regions: { id: Region; label: string; flag: React.ReactNode }[] = [
   { id: "global", label: "Global", flag: "🌐" },
   { id: "gulf", label: "Gulf States", flag: "🇸🇦" },
-  { id: "middleEast", label: "Middle East", flag: "🇸🇾" },
+  { id: "middleEast", label: "Middle East", flag: <SyrianFlag /> },
   { id: "europe", label: "Europe", flag: "🇪🇺" },
 ];
 

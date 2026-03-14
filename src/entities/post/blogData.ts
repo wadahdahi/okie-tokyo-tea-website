@@ -27,7 +27,7 @@ export const blogData: BlogPost[] = [
     category: "Education",
     readTime: 4,
     date: "2025-11-12",
-    image: "/assets/images/matcha-cup-01.webp",
+    image: "/assets/images/articles/20250115_022351.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -39,9 +39,9 @@ export const blogData: BlogPost[] = [
     category: "Health",
     readTime: 5,
     date: "2025-12-01",
-    image: "/assets/images/20250115_024606.jpg",
+    image: "/assets/images/articles/20250115_024606.webp",
     localizedImages: {
-      gulf: "/assets/images/matcha-cup-02.webp",
+      gulf: "/assets/images/20250115_033117.webp",
       middleEast: "/assets/images/mockup.webp",
       europe: "/assets/images/o (19).webp"
     },
@@ -56,7 +56,7 @@ export const blogData: BlogPost[] = [
     category: "Brewing",
     readTime: 3,
     date: "2026-01-08",
-    image: "/assets/images/matcha-cup-circle.webp",
+    image: "/assets/images/articles/hot-green-tea-glass-with-cream-topped-with-green-tea-decorated-with-green-tea-powder(1).webp",
     author: "Okie Tea Masters"
   },
   {
@@ -68,7 +68,7 @@ export const blogData: BlogPost[] = [
     category: "Health",
     readTime: 4,
     date: "2026-02-14",
-    image: "/assets/images/matcha-leave.webp",
+    image: "/assets/images/articles/hot-green-tea-glass-with-cream-topped-with-green-tea-decorated-with-green-tea-powder-1.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -80,7 +80,7 @@ export const blogData: BlogPost[] = [
     category: "Origin",
     readTime: 6,
     date: "2026-03-01",
-    image: "/assets/images/matcha-leave-02.webp",
+    image: "/assets/images/articles/hot-green-tea-glass-with-cream-topped-with-green-tea-decorated-with-green-tea-powder.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -92,15 +92,134 @@ export const blogData: BlogPost[] = [
     category: "Brewing",
     readTime: 3,
     date: "2026-03-10",
-    image: "/assets/images/okietokyotea-pouch-mockup.webp",
+    image: "/assets/images/articles/photo-1589698272390-0501a07619bb(1).webp",
     localizedImages: {
       gulf: "/assets/images/matcha-leave.webp",
       middleEast: "/assets/images/20250115_022351.jpg",
       europe: "/assets/images/matcha-cup-circle.webp"
     },
     author: "Okie Tea Masters"
+  },
+  {
+    id: "7",
+    slug: "matcha-latte-art-beginners-guide",
+    title: "Matcha Latte Art: Beginners Guide",
+    excerpt: "Transform your morning cup into a masterpiece. Learn the basics of pouring hearts and rosettas with matcha.",
+    content: "Creating latte art with matcha is slightly different than with coffee due to the texture of the tea. The key is a perfectly whisked, clump-free matcha base and properly micro-foamed milk. Start with a slow pour into the center of the bowl to create a foundation, then bring the pitcher closer to the surface to draw your design. Patience and a steady hand are your best tools. Even if the art isn't perfect, the taste remains divine.",
+    category: "Brewing",
+    readTime: 5,
+    date: "2026-03-15",
+    image: "/assets/images/articles/premium_photo-1670086031635-fb490c1047e0.webp",
+    author: "Okie Tea Masters"
+  },
+  {
+    id: "8",
+    slug: "role-of-l-theanine-in-focus",
+    title: "The Role of L-Theanine in Focus",
+    excerpt: "Explore the science behind the 'calm alertness' that only high-quality matcha can provide.",
+    content: "L-Theanine is a unique amino acid that crosses the blood-brain barrier to promote relaxation without drowsiness. When combined with the caffeine in matcha, it creates a synergistic effect that enhances cognitive function and mood. Unlike the jittery energy of energy drinks, matcha provides a steady, laser-like focus. This is why matcha has been favored by monks and creative thinkers for centuries.",
+    category: "Health",
+    readTime: 6,
+    date: "2026-03-20",
+    image: "/assets/images/articles/premium_photo-1694825173178-3d2c9bbf5b5f.webp",
+    author: "Okie Tea Masters"
+  },
+  {
+    id: "9",
+    slug: "understanding-harvest-seasons",
+    title: "Understanding Harvest Seasons (First Flush)",
+    excerpt: "Why the 'First Flush' or Shincha is the most prized harvest of the year in the tea world.",
+    content: "The first harvest of the year, occurring in late spring, is known as Ichibancha or the 'First Flush.' These leaves have hibernated all winter, accumulating the highest levels of nutrients and sweetness. Shincha, the very first of this harvest, is incredibly limited and sought after for its intense aroma and vibrant color. At Okie, we prioritize these early harvests to ensure our ceremonial grade matcha meets the highest standards of excellence.",
+    category: "Origin",
+    readTime: 4,
+    date: "2026-03-25",
+    image: "/assets/images/articles/٢٠٢٥٠١١١_١٠٣٥٣٥.webp",
+    author: "Okie Tea Masters"
+  },
+  {
+    id: "10",
+    slug: "traditional-tea-ceremony-etiquette",
+    title: "Traditional Tea Ceremony Etiquette",
+    excerpt: "Respecting the ritual. A guide to the mindfulness and manners expected in a Japanese tea house.",
+    content: "The Japanese tea ceremony, or Chado, is built on four principles: Harmony, Respect, Purity, and Tranquility. As a guest, simple actions like bowing and admiring the bowl (Chawan) show your appreciation for the host's effort. It's not just about drinking tea; it's about the shared moment of silence and beauty. Learning these basics can deepen your personal daily ritual at home.",
+    category: "Education",
+    readTime: 7,
+    date: "2026-04-01",
+    image: "/assets/images/articles/٢٠٢٥٠١١٢_٠٣٠٧٠٤.webp",
+    author: "Okie Tea Masters"
+  },
+  {
+    id: "11",
+    slug: "matcha-vs-sencha-difference",
+    title: "Matcha vs Sencha: What's the Difference?",
+    excerpt: "Both are green teas, but their cultivation and preparation couldn't be more different.",
+    content: "While both come from the Camellia sinensis plant, matcha is shade-grown and ground into a fine powder, meaning you consume the entire leaf. Sencha, however, is grown in full sunlight and prepared by steeping the leaves in water. This leads to very different nutritional profiles and flavor palettes. Matcha is creamy and 'umami' rich, while Sencha is often described as grassy, fresh, and slightly astringent.",
+    category: "Education",
+    readTime: 5,
+    date: "2026-04-05",
+    image: "/assets/images/articles/٢٠٢٥٠١١٢_٠٣٠٨٠٠.webp",
+    author: "Okie Tea Masters"
+  },
+  {
+    id: "12",
+    slug: "vegan-matcha-mousse-recipe",
+    title: "Creating the Perfect Vegan Matcha Mousse",
+    excerpt: "A light, airy, and healthy dessert that brings out the best of ceremonial grade matcha.",
+    content: "Using aquafaba or coconut cream as a base, you can create a decadent matcha mousse that is entirely plant-based. The bitterness of the tea balances perfectly with a touch of agave or maple syrup. Top it with fresh raspberries for a visually stunning and delicious treat. It's the perfect way to share the joy of matcha with friends who have a sweet tooth.",
+    category: "Brewing",
+    readTime: 4,
+    date: "2026-04-10",
+    image: "/assets/images/articles/٢٠٢٥٠١١٢_٠٣١٩٥٤.webp",
+    author: "Okie Tea Masters"
+  },
+  {
+    id: "13",
+    slug: "historical-origins-dynasty-to-zen",
+    title: "Historical Origins: From Dynasty to Zen",
+    excerpt: "Tracing the 800-year journey of matcha from the Tang Dynasty to the Zen temples of Kyoto.",
+    content: "Matcha's story began in China, where tea was compressed into bricks for easy transport. However, it was the Japanese Buddhist monk Eisai who brought the seeds and the whisking method to Japan in 1191. Over centuries, the Japanese refined the process, developing the shade-growing technique that gives matcha its unique properties today. Understanding its history makes every sip feel like a connection to the past.",
+    category: "Origin",
+    readTime: 8,
+    date: "2026-04-15",
+    image: "/assets/images/articles/20250115_033117.webp",
+    author: "Okie Tea Masters"
+  },
+  {
+    id: "14",
+    slug: "sustainable-matcha-farming",
+    title: "Sustainable Matcha: Our Commitment to Earth",
+    excerpt: "How Okie Tokyo Tea works with farmers to ensure soil health and biodiversity in Uji.",
+    content: "Sustainability is at the core of our sourcing philosophy. By working with small, family-owned farms that use organic fertilizers and pesticide-free methods, we help protect the delicate ecosystem of Uji. Healthy soil leads to healthier tea plants and a more flavorful cup. We believe that respecting nature is the only way to produce truly premium matcha.",
+    category: "Origin",
+    readTime: 5,
+    date: "2026-04-20",
+    image: "/assets/images/articles/٢٠٢٥٠١١٢_١٢٤٠٥٩.webp",
+    author: "Okie Tea Masters"
+  },
+  {
+    id: "15",
+    slug: "morning-matcha-ritual-design",
+    title: "Designing Your Morning Matcha Ritual",
+    excerpt: "Steps to create a calm, focused start to your day using the power of mindful preparation.",
+    content: "A morning ritual is a sanctuary of peace before the world wakes up. Start by clearing your space, sifting your tea with intention, and feeling the warmth of the bowl in your hands. This small investment of time (just 5-10 minutes) can reprogram your brain for a more productive and balanced day. It's not just a drink; it's a boundary between rest and action.",
+    category: "Education",
+    readTime: 4,
+    date: "2026-04-25",
+    image: "/assets/images/articles/٢٠٢٥٠١١٥_٠٢٠٦٢٦.webp",
+    author: "Okie Tea Masters"
+  },
+  {
+    id: "16",
+    slug: "matcha-for-cognitive-focus",
+    title: "Matcha for Energy: Beyond the Caffeine",
+    excerpt: "Why matcha is the ultimate biohack for students, developers, and creative professionals.",
+    content: "Unlike the spiked energy of synthetic stimulants, the energy from matcha is bioavailable and sustained. The combination of antioxidants and amino acids supports long-term brain health while providing immediate clarity. Whether you're studying for an exam or writing code, matcha helps you stay in the 'flow state' longer. It is truly nature's most sophisticated energy source.",
+    category: "Health",
+    readTime: 5,
+    date: "2026-05-01",
+    image: "/assets/images/articles/٢٠٢٥٠١١٥_٠٢١٠١٠.webp",
+    author: "Okie Tea Masters"
   }
 ];
 
 export const blogCategories = ["All", "Education", "Health", "Brewing", "Origin"];
-

@@ -1,17 +1,15 @@
 import React from "react";
 import SectionHeader from "../../shared/components/SectionHeader";
 import { productsData } from "../../entities/product/productsData";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { AnimatePresence } from "framer-motion";
 import { usePagination } from "../../shared/hooks/usePagination";
 import ProductCard from "../../entities/product/components/ProductCard/ProductCard";
-import Button from "../../shared/components/Button/Button";
-
 import SearchBar from "../../shared/components/SearchBar";
 import FilterBar from "../../shared/components/FilterBar";
 import ViewToggle from "../../shared/components/ViewToggle";
+import Pagination from "../../shared/components/Pagination/Pagination";
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 8;
 
 const CATEGORIES = [
   { label: "All Products", value: "all" },
@@ -113,58 +111,14 @@ const Products: React.FC = () => {
       </div>
 
       {/* PAGINATION */}
-      {totalPageCount > 1 && (
-        <div className="flex justify-center items-center flex-wrap gap-2 md:gap-3 mt-12 md:mt-20">
-          <Button
-            type="button"
-            variant="secondary"
-            size="sm"
-            onClick={(e) => {
-              e.preventDefault();
-              prevPage();
-            }}
-            disabled={currentPage === 1}
-            className="p-3! md:p-4!"
-            title="Previous Page"
-          >
-            <FaChevronLeft className="text-sm md:text-base text-brand-accent" />
-          </Button>
-
-          <div className="flex flex-wrap justify-center gap-1 md:gap-2">
-            {paginationRange?.map((page, i) => (
-              <Button
-                key={i}
-                type="button"
-                variant={currentPage === page ? "primary" : "ghost"}
-                size="sm"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (typeof page === "number") setPage(page);
-                }}
-                disabled={page === "..."}
-                className={`w-10! h-10! md:w-12! md:h-12! p-0! rounded-xl! ${currentPage === page ? "shadow-lg shadow-brand-accent/30 scale-105 md:scale-110 font-black text-xs md:text-base" : "font-bold text-brand-muted text-xs md:text-base"}`}
-              >
-                {page}
-              </Button>
-            ))}
-          </div>
-
-          <Button
-            type="button"
-            variant="secondary"
-            size="sm"
-            onClick={(e) => {
-              e.preventDefault();
-              nextPage();
-            }}
-            disabled={currentPage === totalPageCount}
-            className="p-3! md:p-4!"
-            title="Next Page"
-          >
-            <FaChevronRight className="text-sm md:text-base text-brand-accent" />
-          </Button>
-        </div>
-      )}
+      <Pagination
+        currentPage={currentPage}
+        totalPageCount={totalPageCount}
+        paginationRange={paginationRange || []}
+        onNext={nextPage}
+        onPrev={prevPage}
+        onPageChange={setPage}
+      />
     </div>
   );
 };

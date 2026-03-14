@@ -7,6 +7,9 @@ import ProductCard from "../../entities/product/components/ProductCard/ProductCa
 import { useUserRegion } from "../../features/personalization/hooks/useUserRegion";
 import SectionHeader from "../../shared/components/SectionHeader";
 
+import { usePagination } from "../../shared/hooks/usePagination";
+import Pagination from "../../shared/components/Pagination/Pagination";
+
 /**
  * BLOG POST DETAIL PAGE
  * RESPONSIVE PROPORTIONAL LAYOUT WITHOUT RAW PIXEL VALUES
@@ -18,6 +21,32 @@ const BlogPostDetail: React.FC = () => {
 
   const currentPost = useMemo(() => blogData.find((p) => p.slug === slug), [slug]);
   const otherPosts = useMemo(() => blogData.filter((p) => p.slug !== slug), [slug]);
+
+  // HANDLE RESPONSIVE SIBLING COUNT FOR PAGINATION
+  const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
+  React.useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const siblingCount = windowWidth < 640 ? 0 : 0; // KEEP IT COMPACT IN SIDEBAR
+
+  const {
+    currentPage,
+    currentItems,
+    paginationRange,
+    nextPage,
+    prevPage,
+    setPage,
+    totalPageCount,
+  } = usePagination(otherPosts, 4, siblingCount);
+
+  // RESET PAGE ON ARTICLE CHANGE
+  React.useEffect(() => {
+    setPage(1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [slug, setPage]);
 
   const relatedProducts = useMemo(() => {
     // PICK 3 RANDOM PRODUCTS
@@ -54,13 +83,13 @@ const BlogPostDetail: React.FC = () => {
         </div>
 
         {/* PROPORTIONAL GRID SYSTEM */}
-        <div className="w-full flex flex-row gap-8 lg:gap-12 items-start">
+        <div className="w-full flex flex-col lg:flex-row gap-12 items-start">
           
           {/* MAIN COLUMN */}
-          <article className="w-2/3 md:col-span-2 lg:col-span-3 bg-brand-card border border-brand-border rounded-4xl overflow-hidden shadow-sm">
+          <article className="w-full lg:w-2/3 bg-brand-card border border-brand-border rounded-4xl overflow-hidden shadow-sm">
             
             {/* HERO IMAGE */}
-            <div className="w-full h-[600px] bg-brand-secondary tr-rounded-4xl tl-rounded-4xl overflow-hidden mb-10 lg:mb-12 border border-brand-border flex items-center justify-center">
+            <div className="w-full h-auto min-h-[300px] max-h-[600px] bg-brand-secondary tr-rounded-4xl tl-rounded-4xl overflow-hidden mb-10 lg:mb-12 border border-brand-border flex items-center justify-center">
               <img 
                 src={currentPost.localizedImages?.[region] || currentPost.image} 
                 alt={currentPost.title} 
@@ -68,7 +97,7 @@ const BlogPostDetail: React.FC = () => {
               />
             </div>
 
-            <div className="px-2 lg:px-14">
+            <div className="px-6 lg:px-14 pb-14">
               <header className="mb-10">
                 <div className="flex flex-wrap items-center gap-6 text-brand-muted text-[11px] font-bold mb-8 opacity-70">
                   <div className="flex items-center gap-2">
@@ -82,7 +111,7 @@ const BlogPostDetail: React.FC = () => {
                   </div>
                 </div>
 
-                <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-brand-text leading-[1.1] mb-8">
+                <h1 className="text-3xl lg:text-5xl font-black text-brand-text leading-[1.1] mb-8">
                   {currentPost.title}
                 </h1>
               </header>
@@ -99,20 +128,20 @@ const BlogPostDetail: React.FC = () => {
           </article>
 
           {/* SIDEBAR COLUMN */}
-          <aside className="w-1/3 md:col-span-1 lg:col-span-1 sticky top-32 flex flex-col gap-10 overflow-hidden">
-            <div className="bg-brand-card border border-brand-border rounded-4xl p-4 lg:p-6 w-full">
+          <aside className="w-full lg:w-1/3 lg:sticky lg:top-32 flex flex-col gap-10">
+            <div className="bg-brand-card border border-brand-border rounded-4xl p-6 lg:p-8 w-full shadow-sm">
               <h2 className="text-xs font-black uppercase tracking-[0.4em] text-brand-text mb-8 border-b border-brand-border pb-5">
                 Keep Reading
               </h2>
-              <div className="flex flex-col gap-6 w-full">
-                {otherPosts.slice(0, 5).map((post) => (
+              <div className="flex flex-col gap-6 w-full mb-8">
+                {currentItems.map((post) => (
                   <Link
                     key={post.id}
                     to={`/blog/${post.slug}`}
-                    className="group flex flex-row gap-4 items-center transition-all hover:bg-brand-accent/5 rounded-2xl w-full border border-transparent hover:border-brand-accent/10"
+                    className="group flex flex-row gap-4 items-center transition-all hover:bg-brand-accent/5 rounded-2xl w-full border border-transparent hover:border-brand-accent/10 p-2"
                   >
                     {/* LEFT: IMAGE MINI THUMBNAIL */}
-                    <div className="w-16 md:w-20 aspect-square shrink-0 rounded-2xl overflow-hidden bg-brand-secondary border border-brand-border flex items-center justify-center shadow-sm">
+                    <div className="w-20 h-20 shrink-0 rounded-2xl overflow-hidden bg-brand-secondary border border-brand-border shadow-sm">
                       <img 
                         src={post.localizedImages?.[region] || post.image} 
                         alt={post.title} 
@@ -121,10 +150,10 @@ const BlogPostDetail: React.FC = () => {
                     </div>
                     {/* RIGHT: CONTENT RELATIVE FLEX */}
                     <div className="flex flex-col flex-1 min-w-0">
-                      <h3 className="text-[13px] font-black text-brand-text leading-tight mb-1 group-hover:text-brand-accent transition-colors line-clamp-1">
+                      <h3 className="text-[14px] font-black text-brand-text leading-tight mb-1 group-hover:text-brand-accent transition-colors line-clamp-1">
                         {post.title}
                       </h3>
-                      <p className="text-[11px] text-brand-muted line-clamp-1 mb-1.5 opacity-80">
+                      <p className="text-[11px] text-brand-muted line-clamp-2 mb-1.5 opacity-80">
                         {post.excerpt}
                       </p>
                       <div className="flex items-center gap-2 text-[9px] font-bold text-brand-muted uppercase tracking-[0.2em]">
@@ -134,6 +163,16 @@ const BlogPostDetail: React.FC = () => {
                   </Link>
                 ))}
               </div>
+
+              {/* SIDEBAR PAGINATION */}
+              <Pagination
+                currentPage={currentPage}
+                totalPageCount={totalPageCount}
+                paginationRange={paginationRange || []}
+                onNext={nextPage}
+                onPrev={prevPage}
+                onPageChange={setPage}
+              />
             </div>
 
             {/* NEWSLETTER */}
