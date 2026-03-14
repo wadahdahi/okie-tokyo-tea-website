@@ -8,7 +8,7 @@ import { useHeaderActions } from ".././useHeaderActions";
 import { useAppSelector } from "../../../shared/hooks/useAppRedux";
 import { navLinks } from ".././navData";
 import { NavLink } from "react-router-dom";
-import Button from "../../../shared/components/Button/Button";
+import RegionSwitcher from "../../../shared/components/RegionSwitcher/RegionSwitcher";
 import { SHAPES } from "../../../shared/constants/shapes";
 
 const MobileMenu: React.FC = () => {
@@ -29,7 +29,7 @@ const MobileMenu: React.FC = () => {
     }
   };
 
-  const menuContent = (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -37,7 +37,6 @@ const MobileMenu: React.FC = () => {
           animate="open"
           exit="closed"
           variants={menuVariants}
-          // HIGH TRANSPARENCY + STRONG BLUR
           className="fixed top-0 left-0 h-dvh w-screen bg-brand-bg/40 backdrop-blur-2xl z-9999 lg:hidden flex flex-col"
         >
           {/* TOP BAR */}
@@ -60,8 +59,8 @@ const MobileMenu: React.FC = () => {
           </div>
 
           {/* LEFT-ALIGNED NAVIGATION */}
-          <nav className="flex-1 px-12 py-12 overflow-y-auto">
-            <ul className={`flex flex-col gap-10 ${isRTL ? 'items-end' : 'items-start'}`}>
+          <nav className="flex-1 px-12 py-10 overflow-y-auto flex items-center">
+            <ul className={`flex flex-col gap-8 w-full ${isRTL ? 'items-end' : 'items-start'}`}>
               {navLinks.map((link, index) => (
                 <li key={link.path} className="w-full">
                   <motion.div 
@@ -73,7 +72,7 @@ const MobileMenu: React.FC = () => {
                       to={link.path}
                       onClick={closeMenu}
                       className={({ isActive }) => `
-                        text-3xl md:text-4xl font-black uppercase tracking-tight transition-all block relative w-fit
+                        text-2xl md:text-3xl font-black uppercase tracking-tight transition-all block relative w-fit
                         ${isActive ? 'text-brand-accent' : 'text-brand-text/80 hover:text-brand-accent'}
                       `}
                     >
@@ -83,7 +82,7 @@ const MobileMenu: React.FC = () => {
                           {isActive && (
                             <motion.div 
                               layoutId="activeLine"
-                              className="absolute -bottom-2 left-0 w-full h-1 bg-brand-accent rounded-full"
+                              className="absolute -bottom-1 left-0 w-full h-1 bg-brand-accent rounded-full"
                             />
                           )}
                         </div>
@@ -95,56 +94,62 @@ const MobileMenu: React.FC = () => {
             </ul>
           </nav>
 
-          {/* ACTIONS FOOTER WITH GLASS EFFECT */}
-          <div className="p-10 bg-brand-secondary/40 backdrop-blur-md flex flex-col gap-8 border-t border-brand-border/20">
-            <div className="flex justify-between items-center gap-6">
-              <Button
-                variant="secondary"
+          {/* ACTIONS FOOTER - SINGLE ROW */}
+          <div className="p-10 bg-brand-secondary/40 backdrop-blur-md border-t border-brand-border/20">
+            <div className="flex justify-between items-center gap-4">
+              {/* THEME */}
+              <button
                 onClick={handleToggleTheme}
-                title="Theme Toggle"
-                className="w-12! sm:w-16! h-12! sm:h-16! p-0! rounded-full! flex! items-center! justify-center! text-2xl border-2! border-brand-accent! bg-brand-bg/50 shadow-xl"
+                className="w-14 h-14 rounded-2xl flex items-center justify-center text-xl bg-brand-bg/60 border border-brand-border shadow-sm text-brand-accent"
+                title="Toggle Theme"
               >
-                {theme === "light" ? <FaMoon className="text-brand-accent" /> : <FaSun className="text-yellow-500" />}
-              </Button>
+                {theme === "light" ? <FaMoon /> : <FaSun className="text-yellow-500" />}
+              </button>
 
-              <div className="flex-1 flex items-center gap-3 bg-brand-bg/50 border border-brand-border px-6 py-4 rounded-3xl shadow-sm">
-                <FaGlobe className="text-brand-accent" />
+              {/* CART */}
+              <button
+                onClick={() => {
+                  handleToggleCart();
+                  closeMenu();
+                }}
+                className="w-14 h-14 rounded-2xl flex items-center justify-center text-xl bg-brand-bg/60 border border-brand-border shadow-sm text-brand-accent relative"
+                title="Open Cart"
+              >
+                <FaShoppingCart />
+                {totalQuantity > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-brand-accent text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px] font-black border-2 border-brand-bg">
+                    {totalQuantity}
+                  </span>
+                )}
+              </button>
+
+              {/* LANGUAGE */}
+              <div className="flex-1 flex items-center justify-center bg-brand-bg/60 border border-brand-border h-14 rounded-2xl shadow-sm px-4 relative">
+                <FaGlobe className="text-brand-accent mr-2 shrink-0" />
                 <select
                   value={currentLang}
                   onChange={(e) => changeLanguage(e.target.value)}
-                  className="bg-transparent text-sm font-black text-brand-text uppercase focus:outline-none appearance-none flex-1"
-                  title="Language Selector"
+                  className="bg-transparent text-xs font-black text-brand-text uppercase focus:outline-none appearance-none cursor-pointer pr-4"
+                  title="Select Language"
                 >
-                  <option value="en">English (EN)</option>
-                  <option value="ar">العربية (AR)</option>
-                  <option value="de">Deutsch (DE)</option>
+                  <option value="en">EN</option>
+                  <option value="ar">AR</option>
+                  <option value="de">DE</option>
                 </select>
+                <div className="absolute right-3 pointer-events-none text-[8px] text-brand-muted">▼</div>
+              </div>
+
+              {/* REGION */}
+              <div className="flex items-center justify-center h-14">
+                <RegionSwitcher variant="compact" />
               </div>
             </div>
-
-            <Button
-              variant="primary"
-              onClick={() => {
-                handleToggleCart();
-                closeMenu();
-              }}
-              className="w-full py-6 rounded-3xl gap-4 text-xl justify-center shadow-2xl shadow-brand-accent/40"
-            >
-              <FaShoppingCart />
-              <span className="font-black uppercase tracking-tight">{t('header.cart_title')}</span>
-              {totalQuantity > 0 && (
-                <span className="bg-white text-brand-accent px-3 py-1 rounded-full text-sm font-black min-w-[28px] text-center">
-                  {totalQuantity}
-                </span>
-              )}
-            </Button>
           </div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
-
-  return createPortal(menuContent, document.body);
 };
 
 export default MobileMenu;

@@ -22,10 +22,15 @@ const regions: { id: Region; label: string; flag: React.ReactNode }[] = [
   { id: "europe", label: "Europe", flag: "🇪🇺" },
 ];
 
-const RegionSwitcher: React.FC = () => {
+interface RegionSwitcherProps {
+  variant?: "default" | "compact";
+}
+
+const RegionSwitcher: React.FC<RegionSwitcherProps> = ({ variant = "default" }) => {
   const { region: currentRegion, setManualRegion, isAuto } = useRegion();
   const [isOpen, setIsOpen] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const isCompact = variant === "compact";
 
   const selectedRegion = regions.find((r) => r.id === currentRegion) || regions[0];
 
@@ -44,14 +49,20 @@ const RegionSwitcher: React.FC = () => {
     <div className="relative" ref={containerRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 bg-brand-secondary/50 hover:bg-brand-secondary px-3 py-1.5 rounded-full border border-brand-border transition-all group"
+        className={isCompact 
+          ? "w-14 h-14 rounded-2xl flex items-center justify-center text-xl bg-brand-bg/60 border border-brand-border shadow-sm text-brand-accent transition-all active:scale-95"
+          : "flex items-center gap-2 bg-brand-secondary/50 hover:bg-brand-secondary px-3 py-1.5 rounded-full border border-brand-border transition-all group"
+        }
       >
-        <span className="text-sm">{selectedRegion.flag}</span>
-        <span className="text-[10px] font-black uppercase tracking-widest text-brand-text hidden md:block">
-          {selectedRegion.label}
-        </span>
-        <FaChevronDown className={`text-[10px] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
-        
+        <span className={isCompact ? "text-lg" : "text-sm"}>{selectedRegion.flag}</span>
+        {!isCompact && (
+          <>
+            <span className="text-[10px] font-black uppercase tracking-widest text-brand-text hidden md:block">
+              {selectedRegion.label}
+            </span>
+            <FaChevronDown className={`text-[10px] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+          </>
+        )}
         {isAuto && (
           <span className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 rounded-full border border-white" title="Auto-detected" />
         )}
