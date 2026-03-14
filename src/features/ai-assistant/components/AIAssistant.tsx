@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaRobot, FaTimes, FaPaperPlane, FaUserAstronaut } from "react-icons/fa";
+import { FaRobot, FaTimes, FaPaperPlane } from "react-icons/fa";
 
 interface Message {
   id: number;
