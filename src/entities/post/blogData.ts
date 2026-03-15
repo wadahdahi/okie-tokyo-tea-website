@@ -27,7 +27,7 @@ export const blogData: BlogPost[] = [
     category: "Education",
     readTime: 4,
     date: "2025-11-12",
-    image: "/assets/images/articles/20250115_022351.webp",
+    image: "/assets/images/articles/matcha_powder_001.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -39,11 +39,11 @@ export const blogData: BlogPost[] = [
     category: "Health",
     readTime: 5,
     date: "2025-12-01",
-    image: "/assets/images/articles/20250115_024606.webp",
+    image: "/assets/images/articles/man_in_office_holds_matcha_global_001.webp",
     localizedImages: {
-      gulf: "/assets/images/20250115_033117.webp",
-      middleEast: "/assets/images/mockup.webp",
-      europe: "/assets/images/o (19).webp"
+      gulf: "/assets/images/articles/man_in_office_holds_matcha_arabic_gulf_001.webp",
+      middleEast: "/assets/images/articles/man_in_office_holds_matcha_middle_east_001.webp",
+      global: "/assets/images/articles/man_in_office_holds_matcha_global_001.webp"
     },
     author: "Okie Tea Masters"
   },
@@ -56,7 +56,7 @@ export const blogData: BlogPost[] = [
     category: "Brewing",
     readTime: 3,
     date: "2026-01-08",
-    image: "/assets/images/articles/hot-green-tea-glass-with-cream-topped-with-green-tea-decorated-with-green-tea-powder(1).webp",
+    image: "/assets/images/articles/brewing_matcha_001.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -68,7 +68,7 @@ export const blogData: BlogPost[] = [
     category: "Health",
     readTime: 4,
     date: "2026-02-14",
-    image: "/assets/images/articles/hot-green-tea-glass-with-cream-topped-with-green-tea-decorated-with-green-tea-powder-1.webp",
+    image: "/assets/images/articles/woman_holds_matcha_mug_closeup_face.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -80,7 +80,7 @@ export const blogData: BlogPost[] = [
     category: "Origin",
     readTime: 6,
     date: "2026-03-01",
-    image: "/assets/images/articles/hot-green-tea-glass-with-cream-topped-with-green-tea-decorated-with-green-tea-powder.webp",
+    image: "/assets/images/articles/matcha_fields_with_misty_mountains_001.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -92,12 +92,7 @@ export const blogData: BlogPost[] = [
     category: "Brewing",
     readTime: 3,
     date: "2026-03-10",
-    image: "/assets/images/articles/photo-1589698272390-0501a07619bb(1).webp",
-    localizedImages: {
-      gulf: "/assets/images/matcha-leave.webp",
-      middleEast: "/assets/images/20250115_022351.jpg",
-      europe: "/assets/images/matcha-cup-circle.webp"
-    },
+    image: "/assets/images/articles/matcha_wave_001.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -109,7 +104,7 @@ export const blogData: BlogPost[] = [
     category: "Brewing",
     readTime: 5,
     date: "2026-03-15",
-    image: "/assets/images/articles/premium_photo-1670086031635-fb490c1047e0.webp",
+    image: "/assets/images/articles/hot_green_glass_with_cream_topped_with_green_decorated_with_green_powder_001.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -121,7 +116,12 @@ export const blogData: BlogPost[] = [
     category: "Health",
     readTime: 6,
     date: "2026-03-20",
-    image: "/assets/images/articles/premium_photo-1694825173178-3d2c9bbf5b5f.webp",
+    image: "/assets/images/articles/man_in_office_holds_matcha_global_002.webp",
+    localizedImages: {
+      gulf: "/assets/images/articles/man_in_office_holds_matcha_arabic_gulf_002.webp",
+      middleEast: "/assets/images/articles/man_in_office_holds_matcha_middle_east_002.webp",
+      global: "/assets/images/articles/man_in_office_holds_matcha_global_002.webp"
+    },
     author: "Okie Tea Masters"
   },
   {
@@ -133,7 +133,7 @@ export const blogData: BlogPost[] = [
     category: "Origin",
     readTime: 4,
     date: "2026-03-25",
-    image: "/assets/images/articles/٢٠٢٥٠١١١_١٠٣٥٣٥.webp",
+    image: "/assets/images/articles/japanese_man_with_matcha_fields_001.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -145,7 +145,7 @@ export const blogData: BlogPost[] = [
     category: "Education",
     readTime: 7,
     date: "2026-04-01",
-    image: "/assets/images/articles/٢٠٢٥٠١١٢_٠٣٠٧٠٤.webp",
+    image: "/assets/images/articles/brewing_matcha_002.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -157,7 +157,7 @@ export const blogData: BlogPost[] = [
     category: "Education",
     readTime: 5,
     date: "2026-04-05",
-    image: "/assets/images/articles/٢٠٢٥٠١١٢_٠٣٠٨٠٠.webp",
+    image: "/assets/images/articles/matcha_general_picture_001.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -169,7 +169,7 @@ export const blogData: BlogPost[] = [
     category: "Brewing",
     readTime: 4,
     date: "2026-04-10",
-    image: "/assets/images/articles/٢٠٢٥٠١١٢_٠٣١٩٥٤.webp",
+    image: "/assets/images/articles/hot_green_glass_with_cream_topped_with_green_decorated_with_green_powder_002.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -181,7 +181,7 @@ export const blogData: BlogPost[] = [
     category: "Origin",
     readTime: 8,
     date: "2026-04-15",
-    image: "/assets/images/articles/20250115_033117.webp",
+    image: "/assets/images/articles/matcha_treasure_cheast_001.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -193,7 +193,7 @@ export const blogData: BlogPost[] = [
     category: "Origin",
     readTime: 5,
     date: "2026-04-20",
-    image: "/assets/images/articles/٢٠٢٥٠١١٢_١٢٤٠٥٩.webp",
+    image: "/assets/images/articles/matcha_fields_with_misty_mountains_002.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -205,7 +205,7 @@ export const blogData: BlogPost[] = [
     category: "Education",
     readTime: 4,
     date: "2026-04-25",
-    image: "/assets/images/articles/٢٠٢٥٠١١٥_٠٢٠٦٢٦.webp",
+    image: "/assets/images/articles/a_girl_floating_on_cloud.webp",
     author: "Okie Tea Masters"
   },
   {
@@ -217,7 +217,12 @@ export const blogData: BlogPost[] = [
     category: "Health",
     readTime: 5,
     date: "2026-05-01",
-    image: "/assets/images/articles/٢٠٢٥٠١١٥_٠٢١٠١٠.webp",
+    image: "/assets/images/articles/man_in_office_holds_matcha_global_003.webp",
+    localizedImages: {
+      gulf: "/assets/images/articles/man_in_office_holds_matcha_arabic_gulf_003.webp",
+      middleEast: "/assets/images/articles/man_in_office_holds_matcha_middle_east_003.webp",
+      global: "/assets/images/articles/man_in_office_holds_matcha_global_003.webp"
+    },
     author: "Okie Tea Masters"
   }
 ];
