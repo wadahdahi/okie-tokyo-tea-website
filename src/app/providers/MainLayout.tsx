@@ -17,7 +17,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <main className="content">{children}</main>
       <Footer />
       <CartPopup />
-      <div className="fixed bottom-10 right-6 lg:right-10 z-1002 flex flex-col items-center gap-4">
+      <div className="fixed bottom-10 right-6 lg:right-10 z-10005 flex flex-col items-center gap-4">
         <AIAssistant />
         <BackToTop />
       </div>

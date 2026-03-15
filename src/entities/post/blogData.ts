@@ -71,7 +71,7 @@ export const blogData: BlogPost[] = [
     image: "/assets/images/articles/woman_holds_matcha_mug_closeup_face.webp",
     localizedImages: {
       gulf: "/assets/images/articles/woman_in_office_holds_matcha_middle_east_hijab_001.webp",
-      middleEast: "/assets/images/articles/woman_in_office_holds_matcha_middle_east_hijab_001.webp",
+      middleEast: "/assets/images/articles/woman_in_office_holds_matcha_middle_east_001.webp",
       global: "/assets/images/articles/woman_in_office_holds_matcha_001.webp"
     },
     author: "Okie Tea Masters"

@@ -56,7 +56,7 @@ const AIAssistant: React.FC = () => {
             initial={{ opacity: 0, y: 20, scale: 0.9, transformOrigin: "bottom right" }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="absolute bottom-20 right-0 w-[350px] sm:w-[400px] h-[550px] max-h-[70vh] sm:max-h-[75vh] bg-brand-card/95 backdrop-blur-2xl border border-brand-border shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] rounded-[2.5rem] flex flex-col overflow-hidden"
+            className="fixed bottom-24 right-6 sm:bottom-28 sm:right-10 w-[min(calc(100vw-3rem),400px)] h-[min(600px,75vh)] bg-brand-card/95 backdrop-blur-3xl border border-brand-border shadow-[0_30px_90px_-15px_rgba(0,0,0,0.4)] rounded-[2.5rem] flex flex-col overflow-hidden z-10006"
           >
             {/* HEADER */}
             <div className="p-6 bg-brand-accent text-white flex justify-between items-center">

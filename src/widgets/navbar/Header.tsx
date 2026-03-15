@@ -35,10 +35,15 @@ const Header: React.FC = () => {
       {/* MOBILE HAMBURGER BUTTON */}
       <button
         onClick={toggleMobileMenu}
-        className="xl:hidden text-brand-accent text-2xl p-2 hover:bg-brand-secondary rounded-xl transition-colors"
+        className="xl:hidden relative text-brand-accent text-2xl p-2 hover:bg-brand-secondary rounded-xl transition-colors"
         title="Toggle Menu"
       >
         <FaBars />
+        {totalQuantity > 0 && (
+          <div className="absolute -top-1 -right-1 bg-brand-accent text-white w-4.5 h-4.5 flex items-center justify-center rounded-full text-[8px] font-black border-2 border-brand-bg shadow-sm animate-pulse">
+            <FaShoppingCart className="scale-[0.7]" />
+          </div>
+        )}
       </button>
 
       {/* DESKTOP CONTENT */}

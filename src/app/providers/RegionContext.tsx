@@ -15,15 +15,6 @@ export const RegionProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [isAuto, setIsAuto] = useState(true);
 
   useEffect(() => {
-    // CHECK LOCAL STORAGE FOR MANUAL OVERRIDE
-    const savedRegion = localStorage.getItem("okie_manual_region") as Region;
-    if (savedRegion) {
-      setRegion(savedRegion);
-      setIsAuto(false);
-      return;
-    }
-
-    // AUTO DETECTION LOGIC
     // AUTO DETECTION LOGIC WITH FALLBACK AND CACHE BUSTING
     const detect = async () => {
       const detectFromApi = async (url: string) => {
