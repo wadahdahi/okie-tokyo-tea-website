@@ -27,10 +27,10 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index, layout = "grid" }) => 
       }`}
     >
       {/* IMAGE */}
-      <div className={`overflow-hidden bg-brand-secondary flex items-center justify-center relative shrink-0 ${
+      <div className={`overflow-hidden bg-brand-secondary relative shrink-0 ${
         isList 
           ? "w-20 h-20 sm:w-48 sm:h-48 rounded-xl sm:rounded-2xl" 
-          : "h-52"
+          : "w-full h-52 sm:h-64"
       }`}>
         <img
           src={post.image}

@@ -89,7 +89,7 @@ const BlogPostDetail: React.FC = () => {
           <article className="w-full lg:w-2/3 bg-brand-card border border-brand-border rounded-4xl overflow-hidden shadow-sm">
             
             {/* HERO IMAGE */}
-            <div className="w-full h-auto min-h-[300px] max-h-[600px] bg-brand-secondary tr-rounded-4xl tl-rounded-4xl overflow-hidden mb-10 lg:mb-12 border border-brand-border flex items-center justify-center">
+            <div className="w-full h-[300px] sm:h-[400px] lg:h-[500px] bg-brand-secondary tr-rounded-4xl tl-rounded-4xl overflow-hidden mb-10 lg:mb-12 border border-brand-border">
               <img 
                 src={currentPost.localizedImages?.[region] || currentPost.image} 
                 alt={currentPost.title} 
