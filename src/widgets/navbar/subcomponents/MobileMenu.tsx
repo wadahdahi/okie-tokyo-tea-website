@@ -37,7 +37,7 @@ const MobileMenu: React.FC = () => {
           animate="open"
           exit="closed"
           variants={menuVariants}
-          className="fixed top-0 left-0 h-dvh w-screen bg-brand-bg/40 backdrop-blur-2xl z-9999 lg:hidden flex flex-col"
+          className="fixed top-0 left-0 h-dvh w-screen bg-brand-bg/40 backdrop-blur-2xl z-9999 xl:hidden flex flex-col"
         >
           {/* TOP BAR */}
           <div className="p-8 flex justify-between items-center border-b border-brand-border/10">
@@ -96,7 +96,7 @@ const MobileMenu: React.FC = () => {
 
           {/* ACTIONS FOOTER - SINGLE ROW */}
           <div className="p-10 bg-brand-secondary/40 backdrop-blur-md border-t border-brand-border/20">
-            <div className="flex justify-between items-center gap-4">
+            <div className="flex justify-start items-center gap-4">
               {/* THEME */}
               <button
                 onClick={handleToggleTheme}
@@ -124,19 +124,19 @@ const MobileMenu: React.FC = () => {
               </button>
 
               {/* LANGUAGE */}
-              <div className="flex-1 flex items-center justify-center bg-brand-bg/60 border border-brand-border h-14 rounded-2xl shadow-sm px-4 relative">
-                <FaGlobe className="text-brand-accent mr-2 shrink-0" />
+              <div className="w-14 h-14 flex items-center justify-center bg-brand-bg/60 border border-brand-border rounded-2xl shadow-sm relative overflow-hidden">
                 <select
                   value={currentLang}
                   onChange={(e) => changeLanguage(e.target.value)}
-                  className="bg-transparent text-xs font-black text-brand-text uppercase focus:outline-none appearance-none cursor-pointer pr-4"
+                  className="bg-transparent text-[11px] font-black text-brand-text uppercase focus:outline-none appearance-none cursor-pointer z-10 w-full h-full text-center"
                   title="Select Language"
                 >
                   <option value="en">EN</option>
                   <option value="ar">AR</option>
                   <option value="de">DE</option>
                 </select>
-                <div className="absolute right-3 pointer-events-none text-[8px] text-brand-muted">▼</div>
+                <div className="absolute top-1 right-2 pointer-events-none text-[6px] text-brand-accent/40">▼</div>
+                <FaGlobe className="absolute bottom-1.5 left-1.5 text-[8px] text-brand-accent/20 pointer-events-none" />
               </div>
 
               {/* REGION */}

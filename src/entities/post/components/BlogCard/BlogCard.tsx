@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaClock, FaArrowRight } from "react-icons/fa";
+import { useUserRegion, Region } from "../../../../features/personalization/hooks/useUserRegion";
 import { BlogPost } from "../../blogData";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +13,10 @@ interface BlogCardProps {
 
 const BlogCard: React.FC<BlogCardProps> = ({ post, index, layout = "grid" }) => {
   const navigate = useNavigate();
+  const region = useUserRegion() as Region;
   const isList = layout === "list";
+
+  const displayImage = post.localizedImages?.[region] || post.image;
 
   return (
     <motion.article
@@ -33,7 +37,8 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index, layout = "grid" }) => 
           : "w-full h-52 sm:h-64"
       }`}>
         <img
-          src={post.image}
+          key={region}
+          src={displayImage}
           alt={post.title}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />

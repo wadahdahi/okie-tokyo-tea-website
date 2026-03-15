@@ -65,14 +65,14 @@ const BlogPostDetail: React.FC = () => {
   }
 
   return (
-    <div className="w-full min-h-screen bg-brand-bg pt-32 pb-20 px-6 md:px-16 lg:px-40">
+    <div className="w-full min-h-screen bg-brand-bg pt-32 pb-20 px-6 md:px-16 lg:px-20 xl:px-30">
       <div className="w-full mx-auto">
         
         {/* TOP NAVIGATION */}
         <div className="mb-12 flex items-center justify-between">
           <button
             onClick={() => navigate("/blog")}
-            className="flex items-center gap-2 text-brand-accent font-black text-sm uppercase tracking-widest hover:-translate-x-1 rtl:hover:translate-x-1 transition-transform"
+            className="cursor-pointer flex items-center gap-2 text-brand-accent font-black text-sm uppercase tracking-widest hover:-translate-x-1 rtl:hover:translate-x-1 transition-transform"
           >
             <FaChevronLeft className="text-xs rtl:rotate-180" />
             Back to Blog
@@ -91,6 +91,7 @@ const BlogPostDetail: React.FC = () => {
             {/* HERO IMAGE */}
             <div className="w-full h-[300px] sm:h-[400px] lg:h-[500px] bg-brand-secondary tr-rounded-4xl tl-rounded-4xl overflow-hidden mb-10 lg:mb-12 border border-brand-border">
               <img 
+                key={region}
                 src={currentPost.localizedImages?.[region] || currentPost.image} 
                 alt={currentPost.title} 
                 className="w-full h-full object-cover"
@@ -117,7 +118,7 @@ const BlogPostDetail: React.FC = () => {
               </header>
 
               <div className="prose prose-brand max-w-none text-brand-muted leading-relaxed text-base lg:text-lg">
-                <p className="mb-10 font-bold text-brand-text italic border-s-4 border-brand-accent ps-8 py-3 bg-brand-accent/5 rounded-e-2xl">
+                <p className="mb-10 font-bold text-brand-text italic border-s-4 border-brand-accent ps-8 py-3 pr-4 bg-brand-accent/5 rounded-e-2xl">
                   {currentPost.excerpt}
                 </p>
                 <div className="whitespace-pre-line text-brand-text/90 leading-loose">
@@ -172,6 +173,7 @@ const BlogPostDetail: React.FC = () => {
                 onNext={nextPage}
                 onPrev={prevPage}
                 onPageChange={setPage}
+                compact
               />
             </div>
 

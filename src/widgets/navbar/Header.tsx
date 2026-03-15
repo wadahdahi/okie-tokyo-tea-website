@@ -35,14 +35,14 @@ const Header: React.FC = () => {
       {/* MOBILE HAMBURGER BUTTON */}
       <button
         onClick={toggleMobileMenu}
-        className="lg:hidden text-brand-accent text-2xl p-2 hover:bg-brand-secondary rounded-xl transition-colors"
+        className="xl:hidden text-brand-accent text-2xl p-2 hover:bg-brand-secondary rounded-xl transition-colors"
         title="Toggle Menu"
       >
         <FaBars />
       </button>
 
       {/* DESKTOP CONTENT */}
-      <div className="hidden lg:flex items-center gap-10">
+      <div className="hidden xl:flex items-center gap-10">
         <Navbar />
         <div className="flex gap-4 items-center shrink-0 min-w-max">
           {/* REGION SELECTOR */}

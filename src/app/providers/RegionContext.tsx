@@ -24,18 +24,38 @@ export const RegionProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }
 
     // AUTO DETECTION LOGIC
+    // AUTO DETECTION LOGIC WITH FALLBACK AND CACHE BUSTING
     const detect = async () => {
+      const detectFromApi = async (url: string) => {
+        const response = await fetch(`${url}?t=${Date.now()}`); // CACHE BUSTER
+        return await response.json();
+      };
+
       try {
-        const response = await fetch("https://ipapi.co/json/");
-        const data = await response.json();
+        // TRY PRIMARY API
+        let data = await detectFromApi("https://ipapi.co/json/");
+        
+        // IF FAILED OR RETURNED GENERIC DATA, TRY SECONDARY
+        if (!data || !data.country_code) {
+          data = await detectFromApi("https://ip-api.com/json/");
+        }
+
+        const countryCode = data.country_code || data.countryCode;
+        if (!countryCode) throw new Error("Could not detect country");
+
         const gulfCountries = ["SA", "AE", "QA", "KW", "BH", "OM"];
         const middleEastCountries = ["SY", "LB", "JO", "IQ", "EG", "PS"];
         const europeCountries = ["DE", "FR", "UK", "IT", "ES", "NL", "SE", "CH"];
         
-        if (gulfCountries.includes(data.country_code)) setRegion("gulf");
-        else if (middleEastCountries.includes(data.country_code)) setRegion("middleEast");
-        else if (europeCountries.includes(data.country_code)) setRegion("europe");
-        else setRegion("global");
+        if (gulfCountries.includes(countryCode)) {
+          setRegion("gulf");
+        } else if (middleEastCountries.includes(countryCode)) {
+          setRegion("middleEast");
+        } else if (europeCountries.includes(countryCode)) {
+          setRegion("europe");
+        } else {
+          setRegion("global");
+        }
       } catch (error) {
         setRegion("global");
       }
