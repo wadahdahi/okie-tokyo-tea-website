@@ -38,7 +38,7 @@ const SplashScreen: React.FC = () => {
           >
             <img 
               src="/assets/svg/noun-matcha-whisk.svg" 
-              alt="Matcha Whisk" 
+              alt="" 
               className="w-full h-full object-contain text-brand-accent"
             />
           </motion.div>
