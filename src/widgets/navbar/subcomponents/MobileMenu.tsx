@@ -135,8 +135,6 @@ const MobileMenu: React.FC = () => {
                   <option value="ar">AR</option>
                   <option value="de">DE</option>
                 </select>
-                <div className="absolute top-1 right-2 pointer-events-none text-[6px] text-brand-accent/40">▼</div>
-                <FaGlobe className="absolute bottom-1.5 left-1.5 text-[8px] text-brand-accent/20 pointer-events-none" />
               </div>
 
               {/* REGION */}
