@@ -27,7 +27,7 @@ interface RegionSwitcherProps {
 }
 
 const RegionSwitcher: React.FC<RegionSwitcherProps> = ({ variant = "default" }) => {
-  const { region: currentRegion, setManualRegion, isAuto } = useRegion();
+  const { region: currentRegion, setManualRegion } = useRegion();
   const [isOpen, setIsOpen] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const isCompact = variant === "compact";
