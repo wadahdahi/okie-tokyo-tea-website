@@ -1,7 +1,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { FaTimes, FaGlobe, FaSun, FaMoon, FaShoppingCart } from "react-icons/fa";
+import { FaTimes, FaSun, FaMoon, FaShoppingCart } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { useMobileMenu } from ".././useMobileMenu";
 import { useHeaderActions } from ".././useHeaderActions";
