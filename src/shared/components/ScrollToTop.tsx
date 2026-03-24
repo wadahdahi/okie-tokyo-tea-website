@@ -5,16 +5,17 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Scroll to the absolute top left of the document instantly upon route change
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant",
-    });
+    // SCROLL TO TOP ON ROUTE CHANGE
+    // @ts-ignore
+    if (window.lenis) {
+      // @ts-ignore
+      window.lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, [pathname]);
 
   return null;
 };
 
 export default ScrollToTop;
-

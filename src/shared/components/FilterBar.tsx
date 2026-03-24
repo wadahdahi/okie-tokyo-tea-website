@@ -22,7 +22,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
           className={`px-6 py-3 rounded-xl text-sm font-black uppercase tracking-widest transition-all duration-300 ${
             activeValue === option.value
               ? "bg-brand-accent text-white shadow-lg shadow-brand-accent/30 scale-105"
-              : "bg-brand-secondary text-brand-muted hover:bg-brand-border hover:text-brand-text"
+              : "bg-btn-primary text-white hover:bg-brand-border hover:text-brand-text"
           }`}
         >
           {option.label}

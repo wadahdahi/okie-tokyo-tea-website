@@ -10,9 +10,18 @@ const Hero: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const heroSlides = useMemo(() => [
-    { image: IMAGES.PRODUCTS.DEFAULT_POUCH },
-    { image: IMAGES.PRODUCTS.CUP_01 },
-    { image: IMAGES.PRODUCTS.CUP_CIRCLE }
+    { 
+      image: IMAGES.PRODUCTS.DEFAULT_POUCH, 
+      bgImage: "/assets/images/articles/matcha_fields_with_misty_mountains_003.webp" 
+    },
+    { 
+      image: IMAGES.PRODUCTS.CUP_01, 
+      bgImage: "/assets/images/articles/brewing_matcha_004.webp" 
+    },
+    { 
+      image: IMAGES.PRODUCTS.CUP_CIRCLE, 
+      bgImage: "/assets/images/articles/matcha_wave_001.webp" 
+    }
   ], []);
 
   const { currentSlide, goToSlide, totalSlides } = useHeroSlider(heroSlides, 8000);
@@ -26,8 +35,29 @@ const Hero: React.FC = () => {
   const isRTL = i18n.language === 'ar';
 
   return (
-    <section className="relative h-screen flex items-center justify-center px-6 md:px-8 pt-40 lg:pt-10 bg-brand-secondary bg-cover bg-center bg-no-repeat group overflow-hidden">
-      <div className="absolute inset-0 bg-brand-secondary/40 pointer-events-none z-10"></div>
+    <section className="relative h-screen flex items-center justify-center px-6 md:px-8 pt-40 lg:pt-10 group overflow-hidden bg-brand-bg">
+      {/* IMMERSIVE BACKGROUND SLIDER */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="absolute inset-0 w-full h-full"
+          >
+            <img 
+              src={heroSlides[currentSlide].bgImage} 
+              alt="" 
+              className="w-full h-full object-cover"
+            />
+            {/* PREMIUM DARK OVERLAY / MASK */}
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-bg/80 via-brand-bg/40 to-brand-bg z-10" />
+            <div className="absolute inset-0 bg-brand-accent/5 backdrop-blur-[2px] z-10" />
+          </motion.div>
+        </AnimatePresence>
+      </div>
       
       {/* BACKGROUND ELEMENTS */}
       <div className="absolute inset-0 w-full pointer-events-none">
@@ -60,8 +90,8 @@ const Hero: React.FC = () => {
         ))}
       </div>
 
-      {/* FOOTER SHAPE */}
-      <div className="absolute -bottom-1 left-0 w-full h-20 md:h-24 bg-brand-bg rounded-[100%_100%_0_0] z-30 flex justify-center">
+      {/* FOOTER SHAPE (TRANSPARENT TO CONNECT WITH FEATURES) */}
+      <div className="absolute -bottom-1 left-0 w-full h-20 md:h-24 rounded-[100%_100%_0_0] z-10 flex justify-center">
         <AnimatePresence>
           {!isScrolled && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ delay: 1 }} className="absolute top-2 flex flex-col items-center gap-1 scale-75">

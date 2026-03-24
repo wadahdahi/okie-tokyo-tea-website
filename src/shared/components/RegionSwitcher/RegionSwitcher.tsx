@@ -63,9 +63,7 @@ const RegionSwitcher: React.FC<RegionSwitcherProps> = ({ variant = "default" }) 
             <FaChevronDown className={`text-[10px] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
           </>
         )}
-        {isAuto && (
-          <span className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 rounded-full border border-white" title="Auto-detected" />
-        )}
+        {/* BLUE BADGE REMOVED */}
       </button>
 
       <AnimatePresence>

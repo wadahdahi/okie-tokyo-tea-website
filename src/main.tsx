@@ -7,6 +7,7 @@ import AppRoutes from "./app/router/AppRoutes";
 import { ThemeProvider } from "./app/providers/ThemeContext";
 import { RegionProvider } from "./app/providers/RegionContext";
 import SplashScreen from "./shared/components/SplashScreen";
+import ScrollToTop from "./shared/components/ScrollToTop";
 import "./app/styles/index.css";
 import "./shared/lib/i18n";
 
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <RegionProvider>
           <SplashScreen />
           <BrowserRouter>
+            <ScrollToTop />
             <AppRoutes />
           </BrowserRouter>
         </RegionProvider>

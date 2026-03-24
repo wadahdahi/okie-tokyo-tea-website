@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-brand-secondary pt-24 pb-12 px-8 md:px-12 2xl:px-24 border-t border-brand-border transition-all">
+    <footer className="bg-linear-to-b from-(--bg-primary) to-(--bg-secondary) pt-24 pb-12 px-8 md:px-12 2xl:px-24 border-t border-brand-border transition-all">
       <div className="w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
         <div className="max-w-xs">
           <Logo className="w-[260px]" />
@@ -117,7 +117,7 @@ const Footer: React.FC = () => {
         </div>
         
         {/* COPYRIGHT & DEV NOTE */}
-        <div className="w-full flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-brand-muted font-black tracking-widest uppercase opacity-50 mt-4">
+        <div className="w-full flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-brand-accent-2 font-black tracking-widest uppercase mt-4">
           <p>© {new Date().getFullYear()} Okie Tokyo Tea. All rights reserved.</p>
           <p>
             Front-end Developer: <span className="text-brand-accent ml-1 opacity-100">Wadah Dahi</span>

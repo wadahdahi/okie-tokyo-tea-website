@@ -6,8 +6,18 @@ import { reviewsData } from "../../homeData";
 
 const Reviews: React.FC = () => {
   return (
-    <section className="bg-brand-secondary px-8 xl:px-12 2xl:px-20">
-      <div className="max-w-[1400px] mx-auto">
+    <section className="bg-brand-secondary relative px-8 xl:px-12 2xl:px-20 overflow-hidden">
+      {/* ARTISTIC BG IMAGE */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.07] z-0">
+        <img 
+          src="/assets/images/articles/matcha_fields_with_misty_mountains_002.webp" 
+          alt="" 
+          className="w-full h-full object-cover grayscale"
+        />
+        <div className="absolute inset-0 bg-radial-gradient from-transparent to-brand-secondary" />
+      </div>
+
+      <div className="max-w-[1400px] mx-auto relative z-10">
         <SectionHeader
           title="Voices of the Tea Community"
           subtitle="Shared experiences from our global family of matcha enthusiasts."

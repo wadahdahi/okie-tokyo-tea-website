@@ -178,7 +178,18 @@ const BlogPostDetail: React.FC = () => {
             </div>
 
             {/* NEWSLETTER */}
-            <div className="p-10 lg:p-12 bg-brand-accent rounded-[3rem] text-white relative overflow-hidden group shadow-2xl shadow-brand-accent/30 text-center w-full">
+            <div className="p-10 lg:p-12 rounded-4xl text-white relative overflow-hidden group shadow-2xl shadow-brand-accent/30 text-center w-full">
+              {/* IMMERSIVE BG */}
+              <div className="absolute inset-0 z-0">
+                <img 
+                  src="/assets/images/articles/matcha_fields_with_misty_mountains_005.webp" 
+                  alt="" 
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-brand-accent/80 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-linear-to-t from-brand-accent via-transparent to-brand-accent/40" />
+              </div>
+
               <div className="relative z-10 w-full">
                 <h4 className="font-black text-3xl mb-4">The Ritual</h4>
                 <p className="text-white/80 text-sm leading-relaxed mb-8">Subscribe to our weekly matcha journal.</p>
@@ -193,7 +204,6 @@ const BlogPostDetail: React.FC = () => {
                   </button>
                 </div>
               </div>
-              <div className="absolute -bottom-20 -end-20 w-52 h-52 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000 pointer-events-none" />
             </div>
           </aside>
         </div>

@@ -15,6 +15,8 @@
   --color-brand-accent: var(--accent);
   --color-brand-border: var(--border);
   --color-brand-card: var(--card-bg);
+  --color-brand-accent-2: var(--accent-2);
+  --color-btn-primary: var(--btn-primary);
 
   /* BREAKPOINTS - USER SPECIFIC */
   --breakpoint-tab: 1280px;
@@ -30,10 +32,12 @@
 
 :root {
   --bg-primary: #f1f8e9;
-  --bg-secondary: #dcedc8;
+  --bg-secondary: #bfe692;
   --text-primary: #1b5e20;
   --text-secondary: #4caf50;
+  --btn-primary: #83c986;
   --accent: #2e7d32;
+  --accent-2: #548d57;
   --border: #dcedc8;
   --card-bg: #ffffff;
 }
@@ -43,6 +47,7 @@
   --bg-secondary: #1a1a1a;
   --text-primary: #f5f5f5;
   --text-secondary: #a1a1a1;
+  --btn-primary: #587c5a;
   --accent: #4caf50;
   --border: #404040;
   --card-bg: #2d2d2d;

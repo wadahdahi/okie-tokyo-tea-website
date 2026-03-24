@@ -18,6 +18,10 @@ export const SmoothScroll = ({ children }: SmoothScrollProps) => {
       infinite: false,
     });
 
+    // EXPOSE LENIS TO WINDOW FOR ROUTER SCROLLING
+    // @ts-ignore
+    window.lenis = lenis;
+
     // TICK FUNCTION FOR RAF
     function raf(time: number) {
       lenis.raf(time);
@@ -28,6 +32,8 @@ export const SmoothScroll = ({ children }: SmoothScrollProps) => {
 
     // CLEANUP
     return () => {
+      // @ts-ignore
+      delete window.lenis;
       lenis.destroy();
     };
   }, []);
