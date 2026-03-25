@@ -68,37 +68,41 @@ const Products: React.FC = () => {
       />
 
       {/* CONTROLS */}
-      <div className="flex flex-col xl:flex-row justify-between items-start gap-8 mb-16 bg-brand-secondary/30 p-6 rounded-4xl border border-brand-border/50">
+      <div className="flex flex-col xl:flex-row justify-between items-start gap-8 mb-16 bg-brand-secondary/30 p-6 rounded-4xl border border-brand-border/50 relative overflow-hidden">
+        <img
+          alt=""
+          src="/assets/images/pattern/okie-circles.webp"
+          className="absolute top-0 left-1/2 w-full h-full object-cover opacity-10 z-10"
+        />
         <div className="flex flex-col md:flex-col items-start gap-8 w-full xl:w-auto">
           <SearchBar
             value={searchQuery}
             onChange={setSearchQuery}
             placeholder="What are you looking for?"
-            className="w-full md:max-w-md"
+            className="w-full md:max-w-md z-12"
           />
           <FilterBar
             options={CATEGORIES}
             activeValue={activeCategory}
             onChange={setActiveCategory}
+            className="z-12"
           />
         </div>
-        
+
         <ViewToggle view={view} onChange={setView} />
       </div>
 
-      <div className={`grid gap-8 py-8 transition-all duration-500 ${
-        view === "grid" 
-          ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 tab:grid-cols-3" 
-          : "grid-cols-1"
-      }`}>
+      <div
+        className={`grid gap-8 py-8 transition-all duration-500 ${
+          view === "grid"
+            ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 tab:grid-cols-3"
+            : "grid-cols-1"
+        }`}
+      >
         <AnimatePresence mode="wait">
           {currentItems.length > 0 ? (
             currentItems.map((product) => (
-              <ProductCard 
-                key={product.id} 
-                product={product} 
-                layout={view}
-              />
+              <ProductCard key={product.id} product={product} layout={view} />
             ))
           ) : (
             <div className="col-span-full py-20 text-center">
@@ -124,5 +128,3 @@ const Products: React.FC = () => {
 };
 
 export default Products;
-
-
