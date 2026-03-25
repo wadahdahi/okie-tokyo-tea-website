@@ -1,5 +1,3 @@
-import React from "react";
-
 const Dashboard = () => {
   return (
     <div className="flex flex-col items items-center justify-center text-white text-center min-h-screen pt-24 pb-12 px-4">
