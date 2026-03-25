@@ -1,29 +1,38 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
 import { Product } from "../../types";
 import Button from "../../../../shared/components/Button/Button";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../../../features/cart/cartSlice";
+import { addToast } from "../../../../shared/lib/uiSlice";
+import { useAppSelector } from "../../../../shared/hooks/useAppRedux";
+import { useScrollToCenter } from "../../../../shared/hooks/useScrollToCenter";
 
 interface ProductCardProps {
   product: Product;
   layout?: "grid" | "list";
 }
 
-import { useDispatch } from "react-redux";
-import { addItem } from "../../../../features/cart/cartSlice";
-import { addToast } from "../../../../shared/lib/uiSlice";
-import { useAppSelector } from "../../../../shared/hooks/useAppRedux";
-
 const ProductCard: React.FC<ProductCardProps> = ({
   product,
   layout = "grid",
 }) => {
   const isList = layout === "list";
+  // redux
   const dispatch = useDispatch();
+  // cart items
   const cartItems = useAppSelector((state) => state.cart.items);
+  // find cart item
   const cartItem = cartItems.find((item) => item.id === product.id);
+  // quantity in cart
   const quantityInCart = cartItem ? cartItem.quantity : 0;
 
+  // scroll to center when click on image
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { scrollToCenter } = useScrollToCenter(cardRef);
+
+  // add product to bag
   const handleAddToBag = () => {
     dispatch(addItem(product));
     dispatch(
@@ -34,6 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <motion.div
+      ref={cardRef}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className={`relative bg-brand-card overflow-hidden border border-brand-border hover:border-brand-accent/30 hover:shadow-2xl transition-all duration-300 group flex ${
@@ -51,6 +61,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       </div>
       {/* PRODUCT IMAGE CONTAINER */}
       <div
+        onClick={scrollToCenter}
         className={`overflow-hidden bg-brand-secondary flex items-center justify-center relative shrink-0 ${
           isList
             ? "w-20 h-20 sm:w-48 sm:h-48 rounded-xl sm:rounded-2xl p-2 sm:p-4"

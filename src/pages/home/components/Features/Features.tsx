@@ -1,7 +1,13 @@
 import { useRef, useState } from "react";
-import { motion, useScroll, useMotionValueEvent, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useMotionValueEvent,
+  useTransform,
+} from "framer-motion";
 import SectionHeader from "../../../../shared/components/SectionHeader";
 import { featuresData } from "../../homeData";
+import { useScrollToCenter } from "../../../../shared/hooks/useScrollToCenter";
 
 const Features: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -9,12 +15,14 @@ const Features: React.FC = () => {
   const { scrollY } = useScroll();
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
+  const featureRef = useRef<HTMLDivElement>(null);
+  const { scrollToCenter } = useScrollToCenter(featureRef);
 
   // 1. INDEPENDENT BINARY EVENT: INSTANT BLUR ON FIRST SCROLL
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 1) setIsScrolled(true); 
+    if (latest > 1) setIsScrolled(true);
     else setIsScrolled(false);
   });
 
@@ -22,30 +30,37 @@ const Features: React.FC = () => {
   const rimOpacity = useTransform(scrollYProgress, [0.35, 0.5], [1, 0]);
 
   return (
-    <section ref={containerRef} className="relative z-20 -mt-24 md:-mt-32 pt-24 md:pt-32 pb-10 overflow-hidden">
+    <section
+      ref={containerRef}
+      className="relative z-20 -mt-24 md:-mt-32 pt-24 md:pt-32 pb-10 overflow-hidden"
+    >
       {/* BACKGROUND BASE (ALWAYS THERE) */}
       <div className="absolute top-[40px] inset-0 bg-brand-bg rounded-t-[100%_40px] md:rounded-t-[100%_80px] z-0" />
 
       {/* THE SECTION IMAGES (STATIC VISIBILITY) */}
       <div className="absolute top-[40px] inset-0 z-10 pointer-events-none overflow-hidden rounded-t-[100%_40px] md:rounded-t-[100%_80px]">
-        <img 
-          src="/assets/images/articles/matcha_general_picture_004.webp" 
-          alt="" 
-          style={{ 
+        <img
+          src="/assets/images/articles/matcha_general_picture_004.webp"
+          alt=""
+          style={{
             opacity: 0.4,
-            maskImage: 'linear-gradient(to bottom, black 0%, black 30%, transparent 80%)', 
-            WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 30%, transparent 80%)' 
+            maskImage:
+              "linear-gradient(to bottom, black 0%, black 30%, transparent 80%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, black 0%, black 30%, transparent 80%)",
           }}
           className="w-full h-full object-cover object-top"
         />
         <div className="absolute inset-0 overflow-hidden">
-          <img 
-            src="/assets/images/articles/matcha_general_picture_004.webp" 
-            alt="" 
+          <img
+            src="/assets/images/articles/matcha_general_picture_004.webp"
+            alt=""
             className="w-full h-full object-cover blur-3xl opacity-40"
-            style={{ 
-              maskImage: 'linear-gradient(to bottom, transparent 30%, black 100%)', 
-              WebkitMaskImage: 'linear-gradient(to bottom, transparent 30%, black 100%)' 
+            style={{
+              maskImage:
+                "linear-gradient(to bottom, transparent 30%, black 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, transparent 30%, black 100%)",
             }}
           />
         </div>
@@ -53,7 +68,7 @@ const Features: React.FC = () => {
       </div>
 
       {/* RIM MASTER WRAPPER - HANDLES TRANSPARENCY INDEPENDENTLY */}
-      <motion.div 
+      <motion.div
         style={{ opacity: rimOpacity }}
         className="absolute top-[40px] left-0 w-full h-32 md:h-48 z-20 pointer-events-none"
       >
@@ -61,9 +76,9 @@ const Features: React.FC = () => {
         {!isScrolled ? (
           <div className="absolute inset-0 bg-brand-bg rounded-t-[100%_40px] md:rounded-t-[100%_80px]" />
         ) : (
-          <div 
+          <div
             style={{ filter: "blur(14px)" }}
-            className="absolute inset-0 bg-linear-to-b from-brand-accent-2 via-brand-accent/20 to-transparent rounded-t-[100%_40px] md:rounded-t-[100%_80px]" 
+            className="absolute inset-0 bg-linear-to-b from-brand-accent-2 via-brand-accent/20 to-transparent rounded-t-[100%_40px] md:rounded-t-[100%_80px]"
           />
         )}
       </motion.div>
@@ -82,6 +97,8 @@ const Features: React.FC = () => {
             const Icon = item.icon;
             return (
               <motion.div
+                ref={featureRef}
+                onClick={scrollToCenter}
                 key={index}
                 whileHover={{ y: -10 }}
                 className="bg-brand-card p-12 rounded-[2.5rem] text-center border border-brand-border hover:shadow-2xl hover:border-brand-accent/30 transition-all duration-300"
