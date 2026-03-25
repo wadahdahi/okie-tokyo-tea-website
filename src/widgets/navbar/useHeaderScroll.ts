@@ -32,6 +32,11 @@ export const useHeaderScroll = (headerRef: RefObject<HTMLElement | null>) => {
   // CLICK OUTSIDE HANDLER
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      // PREVENT HIDE IF CLICKED ON A COMPONENT EXPLICITLY MARKED
+      if ((event.target as Element).closest?.('[data-ignore-header-hide="true"]')) {
+        return;
+      }
+      
       if (!isAtTop && isVisible && headerRef.current && !headerRef.current.contains(event.target as Node)) {
         setIsVisible(false);
       }
@@ -40,6 +45,13 @@ export const useHeaderScroll = (headerRef: RefObject<HTMLElement | null>) => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isAtTop, isVisible, headerRef]);
+
+  // FORCE SHOW HEADER VIA CUSTOM EVENT
+  useEffect(() => {
+    const forceShow = () => setIsVisible(true);
+    window.addEventListener('forceShowHeader', forceShow);
+    return () => window.removeEventListener('forceShowHeader', forceShow);
+  }, []);
 
   return { isVisible, isAtTop, setIsVisible };
 };
